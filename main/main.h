@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 #define basicCurrentPlayerHP 75
 #define basicMaxPlayerHP 75
