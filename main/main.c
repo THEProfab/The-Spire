@@ -1,7 +1,10 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 #include "main.h"
-#include "monsters.h"
-#include "fight.h"
-#include "tower.h"
+#include "../monsters/monsters.h"
+#include "../fight/fight.h"
+#include "../tower/tower.h"
 
 int currentPlayerHP;
 int maxPlayerHP;
