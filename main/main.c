@@ -1,7 +1,40 @@
 #include "main.h"
+#include "monsters.h"
+#include "fight.h"
+#include "tower.h"
+
+int currentPlayerHP;
+int maxPlayerHP;
+int currentPlayerDodge;
+int currentPlayerEnergy;
+int maxPlayerEnergy;
+int currentPlayerMana;
+int maxPlayerMana;
+int playerStrength;
+int playerDexterity;
+int playerFire;
+int playerWeak;
+int playerSlow;
+//item items[5];
 
 void newGame(){
-    printf("\nWIP\n\n");
+    currentPlayerHP = basicCurrentPlayerHP;
+    maxPlayerHP = basicMaxPlayerHP;
+    currentPlayerDodge = basicCurrentPlayerDodge;
+    currentPlayerEnergy = basicCurrentPlayerEnergy;
+    maxPlayerEnergy = basicMaxPlayerEnergy;
+    currentPlayerMana = basicCurrentPlayerMana;
+    maxPlayerMana = basicMaxPlayerMana;
+    playerStrength = basicPlayerStrength;
+    playerDexterity = basicPlayerDexterity;
+    playerFire = basicPlayerFire;
+    playerWeak = basicPlayerWeak;
+    playerSlow = basicPlayerSlow;
+    //items = {} voir le code de 16 pour compléter
+
+    monster monster = goNextFloor()->monster;
+    fight(monster);
+
     displayMainMenu();
 }
 
