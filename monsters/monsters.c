@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
-#include <stdbool.h>
+#include "monsters.h"
 
 /**
  * Basic structure for monster
@@ -22,15 +21,6 @@ struct monster_ {
 };
 
 typedef struct monster_ *monster;
-
-/**C'est Loïc qui pioche aléatoirement dans le tableau que je vais créer*/
-/**Je créé un tableau avec les ids des monstres pour les 2 phases de niveaux*/
-
-/** En gros je fais un fichier effets que j'inclue qui créé des
- * structures effet avec valeur de l'effet et type de l'effet
- */
-
-/**Les attaques sont aléatoires**/
 
 //First half monsters
 monster createJawurm1() {
@@ -204,5 +194,3 @@ void monsterMain() {
     monster keeperOfTheFeather = createKeeperOfTheFeather();
     printf("KeeperOfTheFeather name : %s \n", keeperOfTheFeather->name);
 }
-
-#include "monsters.h"
