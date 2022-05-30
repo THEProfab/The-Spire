@@ -9,4 +9,5 @@
 struct cards_ ;
 typedef struct cards_ * cards;
 
+
 #endif //THE_SPIRE_CARDS_H

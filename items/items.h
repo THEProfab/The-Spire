@@ -7,3 +7,6 @@
 #include "effects.h"
 
 #endif //THE_SPIRE_ITEMS_H
+
+struct items_ ;
+typedef struct items_ * items;
