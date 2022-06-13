@@ -1,24 +1,7 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "main.h"
-#include "../monsters/monsters.h"
-#include "../fight/fight.h"
-#include "../tower/tower.h"
+//#include "../monsters/monsters.h"
 
-int currentPlayerHP;
-int maxPlayerHP;
-int currentPlayerDodge;
-int currentPlayerEnergy;
-int maxPlayerEnergy;
-int currentPlayerMana;
-int maxPlayerMana;
-int playerStrength;
-int playerDexterity;
-int playerFire;
-int playerWeak;
-int playerSlow;
-//item items[5];
+//#include "../tower/tower.h"
 
 void newGame(){
     currentPlayerHP = basicCurrentPlayerHP;
@@ -33,10 +16,10 @@ void newGame(){
     playerFire = basicPlayerFire;
     playerWeak = basicPlayerWeak;
     playerSlow = basicPlayerSlow;
-    //items = {} voir le code de 16 pour compléter
+    //items = {} voir le code de 16 pour compléter -> casse croûte
 
-    monster monster = goNextFloor()->monster;
-    fight(monster);
+    // monster monster = goNextFloor()->monster;
+    // fight(monster);
 
     displayMainMenu();
 }
