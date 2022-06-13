@@ -10,6 +10,8 @@
 
 #include <stdlib.h>
 #include <time.h>
+#include <stdio.h>
+
 #include "../monsters/monsters.h"
 
 
@@ -24,4 +26,7 @@ room createTower();
 
 room goNextFloor(room actualRoom);
 
+room menuChoixNextSalle(room actualRoom);
+
+void onEvent(room actualRoom);
 #endif //TOWER_TOWER_H

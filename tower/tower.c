@@ -145,18 +145,74 @@ room createTower() {
 
     return entry;
 }
-
+/**
+ *
+ * @param actualRoom
+ * @return
+ */
 room goNextFloor(room actualRoom) {
+
+
+    do{
+        actualRoom=menuChoixNextSalle(actualRoom);
+        if(actualRoom->event=!0){
+            onEvent(actualRoom);
+        }
+
+    }while(actualRoom->monster==NULL);
 
 
     return actualRoom;
 }
-
-int menuChoixNextSalle(room actualRoom){
-    int choix=0
+/**
+ *
+ * @param actualRoom
+ * @return
+ */
+room menuChoixNextSalle(room actualRoom){
+    int choice=0;
     if(actualRoom->below=NULL){
+        printf("1. above\n");
+        printf("2. straight\n");
+        printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
+        scanf("%d", &choice);
     }
     else{
+        printf("1. above\n");
+        printf("2. straight\n");
+        printf("3. below\n");
+        printf("Que souhaitez-vous faire ? (entrez 1,2 ou 3) ");
+        scanf("%d", &choice);
     }
-    return choix;
+
+    if (choice == 1)
+    {
+        actualRoom=actualRoom->above;
+    } else if (choice == 2)
+    {
+        actualRoom=actualRoom->straight;
+    } else if (choice == 3)
+    {
+        actualRoom=actualRoom->below;
+    } else
+    {
+        printf("\nVous avez saisi un mauvais chiffre !\n\n");
+        menuChoixNextSalle(actualRoom);
+    }
+    return actualRoom;
+}
+/**
+ *
+ * @param actualRoom
+ */
+void onEvent(room actualRoom){
+
+    if(actualRoom->event==1){}
+    else if(actualRoom->event==2){}
+    else if(actualRoom->event==3){}
+    else if(actualRoom->event==4){}
+    else if(actualRoom->event==5){actualRoom->monster=pickAMiniBoss();}
+
+
+
 }
