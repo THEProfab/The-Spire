@@ -164,6 +164,10 @@ monster createKeeperOfTheFeather() {
     return newMonster;
 }
 
+monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
+monster (*monsterArraySecondHalf[3])() = {createJawurm2, createRedoni, createMangoustine};
+monster (*miniBossArray[2])() = {createEldan, createPyrox};
+
 void monsterMain() {
     monster jawurm = createJawurm1();
     printf("Jawurm name : %s \n", jawurm->name);
