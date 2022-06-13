@@ -29,4 +29,8 @@ monster createKeeperOfTheFeather();
 
 void monsterMain();
 
+monster (*monsterArrayFirstHalf[3])();
+monster (*monsterArraySecondHalf[3])();
+monster (*miniBossArray[2])();
+
 #endif //THE_SPIRE_MONSTERS_H
