@@ -7,7 +7,6 @@
 
 #include <stdlib.h>
 #include "../monsters/monsters.h"
-#include "../test fight/player.c"
 
 struct effects_ {
     int type; // 1=damage, 2=fire, 3=dodge, 4=weakness, 5=slowness, 6=strength, 7=dexterity

@@ -6,7 +6,7 @@
 #define THE_SPIRE_DECK_H
 
 #include <stdio.h>
-#include "cards/cards.h"
+#include "../cards/cards.h"
 
 struct deck_ {
     cards card;
