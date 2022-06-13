@@ -2,21 +2,10 @@
 // Created by loicc on 11/05/2022.
 //
 #include "tower.h"
-#include "../monsters/monsters.h"
+
 
 int nbEvent = 5;
 
-monster pickAMonster13() {
-    int randomVariable =(int)rand()%3;
-    return monsterArr; }
-
-monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
-monster (*monsterArraySecondHalf[3])() = {createJawurm2, createRedoni, createMangoustine};
-monster (*miniBossArray[2])() = {createEldan, createPyrox};
-
-monster pickAMonster59() { return createJawurm1(); }
-
-monster pickABoss() { return createJawurm1(); }
 
 int nbMonstre = 3;
 
@@ -155,4 +144,19 @@ room createTower() {
     room boss = createRoom(10, createKeeperOfTheFeather(), 0);
 
     return entry;
+}
+
+room goNextFloor(room actualRoom) {
+
+
+    return actualRoom;
+}
+
+int menuChoixNextSalle(room actualRoom){
+    int choix=0
+    if(actualRoom->below=NULL){
+    }
+    else{
+    }
+    return choix;
 }

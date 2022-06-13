@@ -22,11 +22,6 @@ void createTowerBoucle(room previous1, room previous2, room previous3, room prev
 
 room createTower();
 
-monster pickAMonster13();
-
-monster pickAMonster59();
-
-monster pickABoss();
-
+room goNextFloor(room actualRoom);
 
 #endif //TOWER_TOWER_H
