@@ -4,15 +4,20 @@
 #include "items.h"
 
 struct items_ {
-    int type; // 1=hp, 2=strength, 3=dex, 4=Hp max, 5=morepower
-    int value; // power
+    char* name;
+    effects effect;
+    char* textDescription;
+
 };
+typedef struct items_ * items;
+
 
 items newItem(char* name,effects effect,char* textDescription) {
 
-    items new = malloc(sizeof(items_));
-    new->type=type;
-    new->value=value;
+    items new = malloc(sizeof(items));
+    new->name=name;
+    new->effect=effect;
+    new->textDescription=textDescription;
 
     return new;
 }
@@ -20,11 +25,21 @@ items newItem(char* name,effects effect,char* textDescription) {
 void itemPower(items item)
 {
     if (item->effect->type==9)
-        casseCrout(item->effect->value);
+        casseCroute(item->effect->value);
     if (item->effect->type==10)
-        strength(item->effect->value);
-    if (card->effect->type==11)
-        dexterity(item->effect->value);
-    if (card->effect->type==12)
+        strengthDef(item->effect->value);
+    if (item->effect->type==11)
+        dexterityDef(item->effect->value);
+    if (item->effect->type==13)
         powerMax(item->effect->value);
+    if (item->effect->type==12)
+        HPMax(item->effect->value);
 }
+
+/*
+ exemple creation de casseCroute :
+
+effects effects=newEffect(9,6);
+newItem("casseCroute",effects,"miam");
+
+ */

@@ -1,37 +1,37 @@
 //
 // Created by César on 16/05/2022.
 //
-#include <bool.h>
 #include "cards.h"
 
 struct cards_ {
 
     char* name;
     int rarity; //can be : 1=basique, 2=commune, 3=atypique, 4=rare, 5=special
-    int costEnegrie;// max = 3
+    int costEnegry;// max = 3
     int costMana;// max = 20
-    effects effect[8];// their can have 8 effects max
+    effects *effect;// their can have 8 effects max
     char* textTech;
     char* textDescription;
     bool abyssal;// is abyssal or not - 1 or 0
 };
+typedef struct cards_ * cards;
 
-cards newCard(char* name,int rarity,effects effect[8],int costEnergie,int costMana,char* textTech,char* textDescription,bool abyssal) {
+cards newCard(char* name,int rarity,effects effect[8],int costEnergy,int costMana,char* textTech,char* textDescription,bool abyssal) {
 
-    cards new = malloc(sizeof(cards_));
+    cards new = (cards)malloc(sizeof(struct cards_));
     new->name=name;
     new->rarity=rarity;
-    new->costEnegrie=costEnergie;
+    new->costEnegry=costEnergy;
     new->costMana=costMana;
     for (int i=0; i<8 ; i++)
     {
-        if (effect[i]=!NULL)
+        if (effect[i]==NULL)
         {
-            new->effect=NULL;
+            new->effect[i]=NULL;
         }
         else
         {
-            new->effect=effect;
+            new->effect[i]=effect[i];
         }
     }
     new->textTech=textTech;
@@ -41,6 +41,7 @@ cards newCard(char* name,int rarity,effects effect[8],int costEnergie,int costMa
 
 void cardActivation(cards card,monster monster)
 {
+    int i=0;
     do{
         if (card->effect[i]->type==1)
             damage(card->effect[i]->value,monster);
@@ -56,7 +57,8 @@ void cardActivation(cards card,monster monster)
             strength(card->effect[i]->value,monster);
         if (card->effect[i]->type==7)
             dexterity(card->effect[i]->value,monster);
-    }while(effect[i]!=NULL);
+        i++;
+    }while(card->effect[i]!=NULL);
 }
 
 /*

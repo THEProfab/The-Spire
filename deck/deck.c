@@ -8,6 +8,7 @@ struct deck_ {
     cards card;
     struct deck_ * next;
 };
+typedef struct deck_ * deck;
 
 deck createDeck(cards card){
     deck new = (deck) malloc(sizeof(struct deck_));
@@ -18,7 +19,7 @@ deck createDeck(cards card){
     return new;
 }
 
-deck addCard(deck currentDeck, cards card)
+void addCard(deck currentDeck, cards card)
 {
         if (currentDeck == NULL) {
             printf("aïe cassé");
@@ -42,9 +43,9 @@ void displayDeck(deck deck)
     }
 }
 
-card returnDeck(deck deck)
+cards * returnDeck(deck deck)
 {
-    card tabDeck[21];
+    static cards tabDeck[21];
     for (int i=0;i>20;i++)
     {
         tabDeck[i]=deck->card;
@@ -52,5 +53,3 @@ card returnDeck(deck deck)
     }
     return tabDeck;
 }
-
-
