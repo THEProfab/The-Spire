@@ -3,19 +3,6 @@
 //
 #include "cards.h"
 
-struct cards_ {
-
-    char* name;
-    int rarity; //can be : 1=basique, 2=commune, 3=atypique, 4=rare, 5=special
-    int costEnegry;// max = 3
-    int costMana;// max = 20
-    effects *effect;// their can have 8 effects max
-    char* textTech;
-    char* textDescription;
-    bool abyssal;// is abyssal or not - 1 or 0
-};
-typedef struct cards_ * cards;
-
 cards newCard(char* name,int rarity,effects effect[8],int costEnergy,int costMana,char* textTech,char* textDescription,bool abyssal) {
 
     cards new = (cards)malloc(sizeof(struct cards_));

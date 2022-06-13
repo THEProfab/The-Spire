@@ -4,12 +4,6 @@
 
 #include "deck.h"
 
-struct deck_ {
-    cards card;
-    struct deck_ * next;
-};
-typedef struct deck_ * deck;
-
 deck createDeck(cards card){
     deck new = (deck) malloc(sizeof(struct deck_));
 

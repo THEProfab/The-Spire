@@ -6,9 +6,12 @@
 #define THE_SPIRE_DECK_H
 
 #include <stdio.h>
-#include "cards.c"
+#include "cards/cards.h"
 
-struct deck_ ;
+struct deck_ {
+    cards card;
+    struct deck_ * next;
+};
 typedef struct deck_ * deck;
 
 #endif //THE_SPIRE_DECK_H

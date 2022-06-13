@@ -4,7 +4,7 @@
 
 #ifndef THE_SPIRE_ITEMS_H
 #define THE_SPIRE_ITEMS_H
-#include "effects.c"
+#include "../effects/effects.h"
 
 struct items_ ;
 typedef struct items_ * items;
