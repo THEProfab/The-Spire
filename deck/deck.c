@@ -47,3 +47,9 @@ cards * returnDeck(deck deck)
     }
     return tabDeck;
 }
+/*
+cards shuffle(cards deck[21])
+{
+
+}
+ */
