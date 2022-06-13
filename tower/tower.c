@@ -1,51 +1,24 @@
 //
 // Created by loicc on 11/05/2022.
 //
-
 #include "tower.h"
-#include <stdlib.h>
-#include <time.h>
-/*
-//temporary
-struct monster_ {
-    int id;
-    int hp;
-    char *name;
+#include "../monsters/monsters.h"
 
-    int dodge; //Réduit de x les prochains dégâts reçus, remis à zéro à la fin du tour
-    int strength; //Inflige des dégâts supplémentaires
-    int dexterity; //Donne de l'esquive bonus
-    int fire; //Valeur du feu, diminue de moitié à la fin du tour, inflige des dégâts à cette entité
-    int weak; //Attaque diminuée de 25%, arrondi au supérieur, pour x tours
-    int slow; //Esquive gagnée divisée par deux, diminue de 1 par tour
+int nbEvent = 5;
 
-    //attack* attacks; //Le tableau d'attaques
-};
+monster pickAMonster13() {
+    int randomVariable =(int)rand()%3;
+    return monsterArr; }
 
-typedef struct monster_ * monster;
+monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
+monster (*monsterArraySecondHalf[3])() = {createJawurm2, createRedoni, createMangoustine};
+monster (*miniBossArray[2])() = {createEldan, createPyrox};
 
- monster createJawurm1() {
-     monster newMonster = (monster) malloc(sizeof(struct monster_));
-    int lowerHp = 40;
-    int upperHp = 44;
-    newMonster->id = 0;
-    newMonster->hp = (rand() % (upperHp - lowerHp + 1)) + lowerHp;
-    newMonster->name = "Jawurm";
-    newMonster->dodge = 0;
-    newMonster->strength = 0;
-    newMonster->dexterity = 0;
-    newMonster->fire = 0;
-    newMonster->weak = 0;
-    newMonster->slow = 0;
-    return newMonster;
-}
+monster pickAMonster59() { return createJawurm1(); }
 
-//Temporary
+monster pickABoss() { return createJawurm1(); }
 
-monster pickAMonster13(){return createJawurm1();}
-monster pickAMonster59(){return createJawurm1();}
-monster pickABoss(){return createJawurm1();}
-int nbMonstre=3;
+int nbMonstre = 3;
 
 
 ///Struct of one room
@@ -64,10 +37,10 @@ struct room_ {
     float floor;
 
     // Next room
-    struct room_* above;
-    struct room_* straight;
-    struct room_* below;
-    struct room_* entryPlus;
+    struct room_ *above;
+    struct room_ *straight;
+    struct room_ *below;
+    struct room_ *entryPlus;
 
     // What's in the room
     monster monster;
@@ -76,7 +49,7 @@ struct room_ {
 
 // type def
 
-typedef struct room_* room;
+typedef struct room_ *room;
 
 
 /**
@@ -88,20 +61,18 @@ typedef struct room_* room;
  * @return
  */
 
-/*
-room createRoom(float m_floor,monster m_monster,int m_event)
-{
-    room output = (room)malloc(sizeof(struct room_));
+
+room createRoom(float m_floor, monster m_monster, int m_event) {
+    room output = (room) malloc(sizeof(struct room_));
     output->floor = m_floor;
     output->above = NULL;
     output->straight = NULL;
     output->below = NULL;
     output->entryPlus = NULL;
     output->monster = m_monster;
-    output->event=m_event;
+    output->event = m_event;
     return output;
 }
-
 
 
 /**
@@ -112,8 +83,8 @@ room createRoom(float m_floor,monster m_monster,int m_event)
  * @param previous4
  */
 
-/*
-void createTowerBoucle(room previous1,room previous2,room previous3,room previous4) {
+
+void createTowerBoucle(room previous1, room previous2, room previous3, room previous4) {
     srand(time(NULL));
 
     if (previous1->floor != 9) {
@@ -122,8 +93,8 @@ void createTowerBoucle(room previous1,room previous2,room previous3,room previou
         int randMax = 4;
         int select = 5;
         for (int i = 0; i < 3; ++i) {
-            int condition=0;
-            while (condition!= 1) {      // FAIRE ATTENTION A VERIFIER
+            int condition = 0;
+            while (condition != 1) {      // FAIRE ATTENTION A VERIFIER
                 int pick = rand() % randMax;
                 if (test[pick] != 0) {
                     select = pick;
@@ -146,43 +117,42 @@ void createTowerBoucle(room previous1,room previous2,room previous3,room previou
             select = 5;
         }
 
-            if (previous1->floor == 0) {
-                previous1->above = tab[0];
-                previous1->straight = tab[1];
-                previous1->below = tab[2];
-                previous1->entryPlus = tab[3];
-            } else {
-                previous1->above = tab[0];
-                previous1->straight = tab[1];
-                previous2->above = tab[0];
-                previous2->straight = tab[1];
-                previous2->below = tab[2];
-                previous3->above = tab[1];
-                previous3->straight = tab[2];
-                previous3->below = tab[3];
-                previous4->above = tab[2];
-                previous4->straight = tab[3];
-            }
-            createTowerBoucle(tab[0], tab[1], tab[2], tab[3]);
+        if (previous1->floor == 0) {
+            previous1->above = tab[0];
+            previous1->straight = tab[1];
+            previous1->below = tab[2];
+            previous1->entryPlus = tab[3];
+        } else {
+            previous1->above = tab[0];
+            previous1->straight = tab[1];
+            previous2->above = tab[0];
+            previous2->straight = tab[1];
+            previous2->below = tab[2];
+            previous3->above = tab[1];
+            previous3->straight = tab[2];
+            previous3->below = tab[3];
+            previous4->above = tab[2];
+            previous4->straight = tab[3];
         }
-
+        createTowerBoucle(tab[0], tab[1], tab[2], tab[3]);
     }
 
+}
 
-    /**
-     *
-     * @return
-     */
 
-/*
-    room createTower() {
+/**
+ *
+ * @return
+ */
 
-        room entry = createRoom(0, NULL, 0);
-        createTowerBoucle(entry, entry, entry, entry);
-        room actual = entry;
 
-        room boss = createRoom(10,pickABoss(), 0);
+room createTower() {
 
-        return entry;
-    }
-*/
+    room entry = createRoom(0, NULL, 0);
+    createTowerBoucle(entry, entry, entry, entry);
+    room actual = entry;
+
+    room boss = createRoom(10, createKeeperOfTheFeather(), 0);
+
+    return entry;
+}
