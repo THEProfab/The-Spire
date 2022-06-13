@@ -49,7 +49,7 @@ void displayMainMenu(){
     } else if (choice == 3)
     {
         printf("\nMerci d'avoir joué !\n\n");
-        exit;
+        exit(0);
     } else
     {
         printf("\nVous avez saisi un mauvais chiffre !\n\n");
