@@ -4,6 +4,7 @@
 //#include "../tower/tower.h"
 
 void newGame(){
+    srand(time(NULL));
     currentPlayerHP = basicCurrentPlayerHP;
     maxPlayerHP = basicMaxPlayerHP;
     currentPlayerDodge = basicCurrentPlayerDodge;

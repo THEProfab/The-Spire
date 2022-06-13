@@ -152,8 +152,25 @@ monster createKeeperOfTheFeather() {
 }
 
 monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
+
 monster (*monsterArraySecondHalf[3])() = {createJawurm2, createRedoni, createMangoustine};
+
 monster (*miniBossArray[2])() = {createEldan, createPyrox};
+
+monster pickAMonster13() {
+    int randomVariable = (int) rand() % 3;
+    return monsterArrayFirstHalf[randomVariable]();
+}
+
+monster pickAMonster59() {
+    int randomVariable = (int) rand() % 3;
+    return monsterArraySecondHalf[randomVariable]();
+}
+
+monster pickAMiniBoss() {
+    int randomVariable = (int) rand() % 2;
+    return miniBossArray[randomVariable]();
+}
 
 void monsterMain() {
     monster jawurm = createJawurm1();
