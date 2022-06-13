@@ -6,9 +6,12 @@
 #define THE_SPIRE_EFFECTS_H
 
 #include <stdlib.h>
-#include "autre/monster.c"
+#include "../monsters/monsters.h"
 
-struct effects_ ;
+struct effects_ {
+    int type; // 1=damage, 2=fire, 3=dodge, 4=weakness, 5=slowness, 6=strength, 7=dexterity
+    int value; // power, turn...
+};
 typedef struct effects_ * effects;
 
 #endif //THE_SPIRE_EFFECTS_H
@@ -22,7 +25,7 @@ void weakness(int value, monster monster);
 void slowness(int value, monster monster);
 void strength(int value, monster monster);
 void dexterity(int value, monster monster);
-void casseCroute(int value);
+void sandwich(int value);
 void strengthDef(int value);
 void dexterityDef(int value);
 void powerMax(int value);

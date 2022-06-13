@@ -17,3 +17,4 @@ deck createDeck(cards card);
 void addCard(deck currentDeck, cards card);
 void displayDeck(deck deck);
 cards * returnDeck(deck deck);
+//cards shuffle(cards deck[21]);
