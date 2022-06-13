@@ -4,9 +4,14 @@
 
 #ifndef THE_SPIRE_ITEMS_H
 #define THE_SPIRE_ITEMS_H
-#include "effects.c"
+#include "../effects/effects.h"
 
-struct items_ ;
+struct items_ {
+    char* name;
+    effects effect;
+    char* textDescription;
+
+};
 typedef struct items_ * items;
 
 #endif //THE_SPIRE_ITEMS_H
