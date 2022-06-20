@@ -40,10 +40,12 @@ monster createPyrox();
 //Boss
 monster createKeeperOfTheFeather();
 
-void monsterMain();
+monster pickAMonster13();
 
-monster (*monsterArrayFirstHalf[3])();
-monster (*monsterArraySecondHalf[3])();
-monster (*miniBossArray[2])();
+monster pickAMonster59();
+
+monster pickAMiniBoss();
+
+void monsterMain();
 
 #endif //THE_SPIRE_MONSTERS_H
