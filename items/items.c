@@ -3,14 +3,6 @@
 //
 #include "items.h"
 
-struct items_ {
-    char* name;
-    effects effect;
-    char* textDescription;
-
-};
-typedef struct items_ * items;
-
 
 items newItem(char* name,effects effect,char* textDescription) {
 
@@ -25,7 +17,7 @@ items newItem(char* name,effects effect,char* textDescription) {
 void itemPower(items item)
 {
     if (item->effect->type==9)
-        casseCroute(item->effect->value);
+        sandwich(item->effect->value);
     if (item->effect->type==10)
         strengthDef(item->effect->value);
     if (item->effect->type==11)
