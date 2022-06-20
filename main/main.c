@@ -18,8 +18,17 @@ void newGame(){
     playerSlow = basicPlayerSlow;
     //items = {} voir le code de 16 pour compléter -> casse croûte
 
-    // monster monster = goNextFloor()->monster;
-    // fight(monster);
+    // création du deck
+    effects effects[0]=newEffect(1,6);
+    newCard("Strike","basique",effects,1,0,"Inflige 6 dégâts","L’attaque de base",FALSE);
+
+    // room room = createTower();
+    
+    // while (room->monster->name != "Keeper of the Feather")
+    // {
+    //     room = goNextFloor(room);
+    //     fight(room->monster);
+    // }
 
     displayMainMenu();
 }

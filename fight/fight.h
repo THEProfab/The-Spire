@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../monsters/monsters.h"
-//#include "../deck/deck.h"
+#include "../deck/deck.h"
 
 // stats de base du joueur
 #define basicCurrentPlayerHP 75

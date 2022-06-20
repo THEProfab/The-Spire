@@ -13,7 +13,7 @@ void turn(int turn, monster monster){
     printf("hp : Peter %d %s %d\n", currentPlayerHP, monster->name, monster->hp);
 
     // choix de l'action du monstre, en attente du codage des attaques des monstres
-    //printf("") annonce du choix de l'action du monstre
+    // printf("") annonce du choix de l'action du monstre
 
     // piocher 5 cartes
     // deck hand -> création de la main avec la structure de deck puis assage du pointeur à la fonction de pioche ?
@@ -28,8 +28,8 @@ void turn(int turn, monster monster){
 
 }
 
-void fight(monster monster){
-    //displayDeck();
+void fight(deck deck, monster monster){
+    displayDeck(deck);
     printf("Peter affronte : %s\n", monster->name);
     printf("hp : Peter %d %s %d\n", currentPlayerHP, monster->name, monster->hp);
 
@@ -49,10 +49,18 @@ void fight(monster monster){
         turn(turnNb, monster);
         turnNb++;
     }
+
+    if (currentPlayerHP==0)
+    {
+        printf("Game over !\n");
+    } else if (monster->hp==0) {
+        // choisir une nouvelle carte parmi 3 à ajouter au deck
+    }
+    
     
     // appliquer effets objets
     // vérification présence casse croûte ?
 
-
     // pioche = deck actuel
+    // qui a gagné ?
 }

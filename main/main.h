@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../fight/fight.h"
+#include "../tower/tower.h"
 
 int currentPlayerHP;
 int maxPlayerHP;
