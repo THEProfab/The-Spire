@@ -2,13 +2,6 @@
 #include <stdlib.h>
 #include "monsters.h"
 
-/**
- * Basic structure for monster
- */
-
-
-//typedef struct monster_ *monster;
-
 //First half monsters
 monster createJawurm1() {
     monster newMonster = (monster) malloc(sizeof(struct monster_));
@@ -24,6 +17,19 @@ monster createJawurm1() {
     newMonster->weak = 0;
     newMonster->slow = 0;
     return newMonster;
+}
+
+void jawurm1Abilities(monster jawurm) {
+    int randomValue = rand() % 3;
+    if (randomValue == 0) {
+        damage(11, NULL);
+    } else if (randomValue == 1) {
+        damage(7, NULL);
+        dodge(5, jawurm);
+    } else if (randomValue == 2) {
+        strength(3, jawurm);
+        dodge(6, jawurm);
+    }
 }
 
 monster createBlouni() {
@@ -42,6 +48,16 @@ monster createBlouni() {
     return newMonster;
 }
 
+void blouniAbilities(monster blouni) {
+    int randomValue = rand() % 2;
+    if (randomValue == 0) {
+        damage(13, NULL);
+    } else if (randomValue == 1) {
+        damage(8, NULL);
+        weakness(2, NULL);
+    }
+}
+
 monster createKeliko() {
     monster newMonster = (monster) malloc(sizeof(struct monster_));
     int lowerHp = 60;
@@ -56,6 +72,19 @@ monster createKeliko() {
     newMonster->weak = 0;
     newMonster->slow = 0;
     return newMonster;
+}
+
+void kelikoAbilities(monster keliko) {
+    int randomValue = rand() % 2;
+    if (randomValue == 0) {
+        damage(3, NULL);
+        dodge(3, keliko);
+        strength(2, keliko);
+    } else if (randomValue == 1) {
+        damage(3, NULL);
+        dodge(3, keliko);
+        dexterity(2, keliko);
+    }
 }
 
 //Second half monsters
@@ -75,6 +104,19 @@ monster createJawurm2() {
     return newMonster;
 }
 
+void jawurm2Abilities(monster jawurm) {
+    int randomValue = rand() % 3;
+    if (randomValue == 0) {
+        damage(15, NULL);
+    } else if (randomValue == 1) {
+        damage(12, NULL);
+        dodge(10, jawurm);
+    } else if (randomValue == 2) {
+        strength(3, jawurm);
+        dodge(18, jawurm);
+    }
+}
+
 monster createRedoni() {
     monster newMonster = (monster) malloc(sizeof(struct monster_));
     int lowerHp = 50;
@@ -89,6 +131,16 @@ monster createRedoni() {
     newMonster->weak = 0;
     newMonster->slow = 0;
     return newMonster;
+}
+
+void redoniAbilities(monster redoni) {
+    int randomValue = rand() % 2;
+    if (randomValue == 0) {
+        damage(20, NULL);
+    } else if (randomValue == 1) {
+        damage(15, NULL);
+        weakness(2, NULL);
+    }
 }
 
 monster createMangoustine() {
@@ -107,6 +159,13 @@ monster createMangoustine() {
     return newMonster;
 }
 
+void mangoustineAbilities(monster mangoustine) {
+    damage(3, NULL);
+    dodge(3, mangoustine);
+    strength(2, mangoustine);
+    dexterity(2, mangoustine);
+}
+
 //Minibosses
 monster createEldan() {
     monster newMonster = (monster) malloc(sizeof(struct monster_));
@@ -120,6 +179,21 @@ monster createEldan() {
     newMonster->weak = 0;
     newMonster->slow = 0;
     return newMonster;
+}
+
+void eldanAbilities(monster eldan) {
+    int randomValue = rand() % 3;
+    if (randomValue == 0) {
+        damage(15, NULL);
+    } else if (randomValue == 1) {
+        damage(10, NULL);
+        dodge(15, eldan);
+    } else if (randomValue == 2) {
+        weakness(2, NULL);
+        slowness(2, NULL);
+        strength(-1, NULL);
+        dexterity(-1, NULL);
+    }
 }
 
 monster createPyrox() {
@@ -136,6 +210,17 @@ monster createPyrox() {
     return newMonster;
 }
 
+void pyroxAbilities(monster pyrox) {
+    int randomValue = rand() % 2;
+    if (randomValue == 0) {
+        fire(5, NULL);
+        dodge(10, pyrox);
+    } else if (randomValue == 1) {
+        fire(10, NULL);
+        dexterity(2, pyrox);
+    }
+}
+
 //Boss
 monster createKeeperOfTheFeather() {
     monster newMonster = (monster) malloc(sizeof(struct monster_));
@@ -149,6 +234,28 @@ monster createKeeperOfTheFeather() {
     newMonster->weak = 0;
     newMonster->slow = 0;
     return newMonster;
+}
+
+void keeperOfTheFeatherAbilities(monster keeperOfTheFeather) {
+    int randomValue = rand() % 4;
+    if (randomValue == 0) {
+        fire(3, NULL);
+        damage(6, NULL);
+        strength(1, keeperOfTheFeather);
+        slowness(1, NULL);
+        weakness(1, NULL);
+        dexterity(1, keeperOfTheFeather);
+        dodge(5, keeperOfTheFeather);
+    } else if (randomValue == 1) {
+        damage(30, NULL);
+    } else if (randomValue == 2) {
+        damage(4, NULL);
+        damage(4, NULL);
+        damage(4, NULL);
+        damage(4, NULL);
+        damage(4, NULL);
+    } else if (randomValue == 3) {
+    }
 }
 
 monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
