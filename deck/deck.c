@@ -4,12 +4,6 @@
 
 #include "deck.h"
 
-struct deck_ {
-    cards card;
-    struct deck_ * next;
-};
-typedef struct deck_ * deck;
-
 deck createDeck(cards card){
     deck new = (deck) malloc(sizeof(struct deck_));
 
@@ -21,14 +15,14 @@ deck createDeck(cards card){
 
 void addCard(deck currentDeck, cards card)
 {
-        if (currentDeck == NULL) {
-            printf("aïe cassé");
-        }
+    if (currentDeck == NULL) {
+        printf("aïe cassé");
+    }
 
-        while (currentDeck->next != NULL) {
-            currentDeck = currentDeck->next;
-        }
-        currentDeck->next = createDeck(card);
+    while (currentDeck->next != NULL) {
+        currentDeck = currentDeck->next;
+    }
+    currentDeck->next = createDeck(card);
 }
 
 void displayDeck(deck deck)
@@ -50,6 +44,23 @@ cards * returnDeck(deck deck)
     {
         tabDeck[i]=deck->card;
         deck=deck->next;
+    }
+    return tabDeck;
+}
+
+cards shuffle(cards tabDeck[21])
+{
+    srand(time(NULL));
+    int seed[21];
+    for (int i=0;i<21;i++)
+    {
+        seed[i]=rand()%22;  //seed initialising
+    }
+    for (int i=0;i<21;i++)   //exchange the the first card with the number in the seed card
+    {
+        cards cardChange=tabDeck[i];
+        tabDeck[i]=tabDeck[seed[i]];
+        tabDeck[seed[i]]=cardChange;
     }
     return tabDeck;
 }
