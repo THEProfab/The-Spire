@@ -3,19 +3,6 @@
 //
 #include "cards.h"
 
-struct cards_ {
-
-    char* name;
-    int rarity; //can be : 1=basique, 2=commune, 3=atypique, 4=rare, 5=special
-    int costEnegry;// max = 3
-    int costMana;// max = 20
-    effects *effect;// their can have 8 effects max
-    char* textTech;
-    char* textDescription;
-    bool abyssal;// is abyssal or not - 1 or 0
-};
-typedef struct cards_ * cards;
-
 cards newCard(char* name,int rarity,effects effect[8],int costEnergy,int costMana,char* textTech,char* textDescription,bool abyssal) {
 
     cards new = (cards)malloc(sizeof(struct cards_));
@@ -59,12 +46,14 @@ void cardActivation(cards card,monster monster)
             dexterity(card->effect[i]->value,monster);
         i++;
     }while(card->effect[i]!=NULL);
+
 }
 
 /*
  exemple creation de strike :
 
-effects effects[0]=newEffect(1,6);
+effects effects[8] = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL}
+effects[0]=newEffect(1,6);
 newCard("Strike","basique",effects,1,0,"Inflige 6 dégâts","L’attaque de base",FALSE);
 
  */
