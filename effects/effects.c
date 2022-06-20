@@ -3,12 +3,6 @@
 //
 #include "effects.h"
 
-struct effects_ {
-    int type; // 1=damage, 2=fire, 3=dodge, 4=weakness, 5=slowness, 6=strength, 7=dexterity
-    int value; // power, turn...
-};
-typedef struct effects_ * effects;
-
 effects newEffect(int type, int value) {
 
     effects new = (effects)malloc(sizeof(struct effects_));
@@ -37,7 +31,7 @@ void fire(int value, monster monster)
 void dodge(int value, monster monster)
 {
     if (monster==NULL)
-        playerDodge=value;
+        currentPlayerDodge=value;
     if (monster)
         monster->dodge=value;
 }
@@ -74,7 +68,7 @@ void dexterity(int value, monster monster)
         monster->dexterity+=value;
 }
 
-void casseCroute(int value)
+void sandwich(int value)
 {
     currentPlayerHP+=value;
 }
