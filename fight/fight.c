@@ -5,7 +5,7 @@ void playCard(deck hand, int* handSize, monster monster){
     printf("Votre main est actuellement constituée de :\n");
     
     while(hand != NULL){
-        affichageCard(hand->card);
+        displayCard(hand->card);
         hand = hand->next;
     }
 
@@ -178,7 +178,7 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
     printf("Votre main est actuellement constituée de :\n");
     
     while(hand != NULL){
-        affichageCard(hand->card);
+        displayCard(hand->card);
         hand = hand->next;
     }
 
@@ -394,7 +394,7 @@ void fight(deck currentDeck, monster monster){
 
         printf("Voici 3 cartes :\n");
         while(toChose != NULL){
-            affichageCard(toChose->card);
+            displayCard(toChose->card);
             toChose = toChose->next;
         }
         toChose = startChose;
