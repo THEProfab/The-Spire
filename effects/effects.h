@@ -41,5 +41,6 @@ void strengthDef(int value);
 void dexterityDef(int value);
 void powerMax(int value);
 void HPMax(int value);
+void mana(int value);
 
 #endif //THE_SPIRE_EFFECTS_H
