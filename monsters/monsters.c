@@ -407,8 +407,6 @@ void announceAbilityKeeperOfTheFeather(int randomValue) {
     }
 }
 
-
-
 //First half monsters array
 monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
 

@@ -1,28 +1,17 @@
-//
-// Created by loicc on 11/05/2022.
-//
 #include "tower.h"
 
-
 int nbEvent = 5;
-
-
 int nbMonstre = 3;
-
-
-
-
+//TODO : Enlever les scanf et le remplacer par des scanf_s
 
 /**
- *
- * @param m_floor
- * @param m_monster
- * @param m_event
- * @param m_sanctuary
- * @return
+ * Creates a room
+ * @param m_floor Room floor
+ * @param m_monster Room monster
+ * @param m_event Room event
+ * @param m_previousRoom Previous room (if it exists)
+ * @return the specified room structure
  */
-
-
 room createRoom(float m_floor, monster m_monster, int m_event, room m_previousRoom) {
     room output = (room) malloc(sizeof(struct room_));
     output->floor = m_floor;
@@ -36,35 +25,26 @@ room createRoom(float m_floor, monster m_monster, int m_event, room m_previousRo
     return output;
 }
 
-
 /**
- *
- * @param previous1
- * @param previous2
- * @param previous3
- * @param previous4
+ * Creates the entrance of the tower (first room)
+ * @return the first room
  */
-
-
-
-
-
-/**
- *
- * @return
- */
-
-
 room createTower() {
-
     room entry = createRoom(0, NULL, 0, NULL);
     createTowerBoucle(entry, entry, entry, entry);
     return entry;
 }
+
+/**
+ * Manages the path and links between rooms
+ * @param previous1 top room
+ * @param previous2 mid-top room
+ * @param previous3 mid-bottom room
+ * @param previous4 bottom room
+ */
 void createTowerBoucle(room previous1, room previous2, room previous3, room previous4) {
     srand(time(NULL));
     if (previous1->floor != 9) {
-
         room tab[4];
         int test[4] = {1, 2, 1, 1};
         int randMax = 4;
@@ -93,17 +73,12 @@ void createTowerBoucle(room previous1, room previous2, room previous3, room prev
             }
             select = 5;
         }
-
-
-
         if (previous1->floor == 0) {
             previous1->above = tab[0];
             previous1->straight = tab[1];
             previous1->below = tab[2];
             previous1->entryPlus = tab[3];
-
         } else {
-
             previous1->above = tab[0];
             previous1->straight = tab[1];
             previous2->above = tab[0];
@@ -117,8 +92,8 @@ void createTowerBoucle(room previous1, room previous2, room previous3, room prev
         }
         createTowerBoucle(tab[0], tab[1], tab[2], tab[3]);
     }
-    if (previous1->floor == 9) {room boss = createRoom(10, createKeeperOfTheFeather(), 0, NULL);
-
+    if (previous1->floor == 9) {
+        room boss = createRoom(10, createKeeperOfTheFeather(), 0, NULL);
         previous1->above = boss;
         previous1->straight = boss;
         previous2->above = boss;
@@ -130,40 +105,32 @@ void createTowerBoucle(room previous1, room previous2, room previous3, room prev
         previous4->above = boss;
         previous4->straight = boss;
     }
-
 }
+
 /**
- *
- * @param actualRoom
- * @return
+ * Changes the parameters of the current room to allow going in the next room
+ * @param actualRoom the current room
+ * @return the next room as the actual room (actual room with updated parameters)
  */
 room goNextFloor(room actualRoom) {
-
-
     do {
         actualRoom = menuChoixNextSalle(actualRoom, 0);
-        if (actualRoom->event !=0) {
+        if (actualRoom->event != 0) {
             onEvent(actualRoom);
         }
-
     } while (actualRoom->monster == NULL);
-
-
     return actualRoom;
 }
 
 /**
- *
- * @param actualRoom
- * @return
+ * Displays and manages the menu for the choice of the next room
+ * @param actualRoom the current room
+ * @param event the current event (if it exists)
+ * @return the choosen room as the actual room (actual room with updated parameters)
  */
 room menuChoixNextSalle(room actualRoom, int event) {
-
-
-
     int choice = 0;
     if (actualRoom->below == NULL) {
-
         if (event == 0) {
             printf("1. above\n");
             printf("2. straight\n");
@@ -178,11 +145,9 @@ room menuChoixNextSalle(room actualRoom, int event) {
             printf("3. previous\n");
             printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
             scanf("%d", &choice);
-
             if (choice == 3)choice++;
         }
-
-    } else if(actualRoom!=NULL){
+    } else {
         if (event == 0) {
             printf("1. above\n");
             printf("2. straight\n");
@@ -198,11 +163,8 @@ room menuChoixNextSalle(room actualRoom, int event) {
             printf("4. previous room\n");
             printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
             scanf("%d", &choice);
-
         }
-
     }
-
     if (choice == 1) {
         //actualRoom->above->previousRoom = actualRoom;
         actualRoom = actualRoom->above;
@@ -222,19 +184,18 @@ room menuChoixNextSalle(room actualRoom, int event) {
 }
 
 /**
- *
- * @param actualRoom
+ * Manages the events process (choices and consequences)
+ * @param actualRoom the current room
  */
 void onEvent(room actualRoom) {
     int choice = 0;
-
     if (actualRoom->event == 1) {
         printf("Vous avez trouvez un sanctuaire !!!\n");
         printf("1. Dormez pour regagner la moitié de vos Hp max\n");
         printf("2. Méditer afin d’avoir la possibilité de retirer définitivement une carte du deck principal\n");
         printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
         scanf("%d", &choice);
-
+        //TODO : Demander les fonctions
         if (choice == 1) {
             //demandez une fonction
         } else if (choice == 2) {
@@ -243,7 +204,6 @@ void onEvent(room actualRoom) {
             printf("\nVous avez saisi un mauvais chiffre !\n\n");
             onEvent(actualRoom);
         }
-
     } else if (actualRoom->event == 2) {
         printf("Un téléporteur se présente à Peter, mais impossible de savoir vers où il va!\n");
         eventTP(actualRoom);
@@ -252,8 +212,8 @@ void onEvent(room actualRoom) {
         printf("1. Transformer tous les strike en esquive\n");
         printf("2. Transformer toutes les esquives en strikes\n");
         printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
+        //TODO : Demander à César comment faire
         scanf("%d", &choice);
-
         if (choice == 1) {
             //demandez une fonction
         } else if (choice == 2) {
@@ -263,14 +223,12 @@ void onEvent(room actualRoom) {
             onEvent(actualRoom);
         }
     } else if (actualRoom->event == 4) {
-
         printf("La salle est vide, mais dans un chaudron encore allumé, une potion est presqueprête. Comment la terminer?\n");
         printf("1. Faire une potion de santé (hp max +10)\n");
         printf("2. Faire une potion de mana (mana max +20)\n");
         printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
+        //TODO : Demander les fonctions à Marc
         scanf("%d", &choice);
-
-
         if (choice == 1) {
             //demandez une fonction
         } else if (choice == 2) {
@@ -285,8 +243,6 @@ void onEvent(room actualRoom) {
         printf("2. avancer normalement à la prochaine salle\n");
         printf("Que souhaitez-vous faire ? (entrez 1 ou 2) ");
         scanf("%d", &choice);
-
-
         if (choice == 1) {
             actualRoom->monster = pickAMiniBoss();
         } else if (choice == 2) {
@@ -296,18 +252,18 @@ void onEvent(room actualRoom) {
             onEvent(actualRoom);
         }
     }
-
-
 }
 
+/**
+ * Manages the teleporter event process (choices and change of room)
+ * @param actualRoom
+ */
 void eventTP(room actualRoom) {
     int choice = 0;
-    printf("1. Entrer dans le téléporteur et aller dans une pièce adjacente (possibilitéségales d’avancer, revenir en arrière ou de rester au même niveau) \n");
+    printf("1. Entrer dans le téléporteur et aller dans une pièce adjacente (possibilités égales d’avancer, revenir en arrière ou de rester au même niveau) \n");
     printf("2. Dépenser 10 points de vie pour garantir d’aller à un endroit choisi\n");
     printf("Que souhaitez-vous faire ? (entrez 1,2 ou 3) ");
     scanf("%d", &choice);
-
-
     if (choice == 1) {
         menuChoixNextSalle(actualRoom, 1);
     }
@@ -317,5 +273,4 @@ void eventTP(room actualRoom) {
         printf("\nVous avez saisi un mauvais chiffre !\n\n");
         eventTP(actualRoom);
     }
-
 }
