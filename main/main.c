@@ -14,12 +14,10 @@ void newGame(){
     playerFire = basicPlayerFire;
     playerWeak = basicPlayerWeak;
     playerSlow = basicPlayerSlow;
-    tabItems = {NULL,NULL,NULL,NULL,NULL};
 
     // add the sandwich to the table of items
-    effects tabEffects = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
-    tabEffects[0] = newEffect(9,6);
-    items sandwich = newItem("casseCroute",tabEffects,"miam");
+    effects effect = newEffect(9,6);
+    items sandwich = newItem("casseCroute",effect,"miam");
     tabItems[0] = sandwich;
 
     // creation of the starting deck
@@ -29,7 +27,7 @@ void newGame(){
     
     while (room->monster->name != "Keeper of the Feather")
     {
-        room = goNextFloor(room);
+        room = goNextFloor(room, currentDeck);
         fight(currentDeck, room->monster);
     }
 

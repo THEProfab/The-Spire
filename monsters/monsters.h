@@ -1,8 +1,6 @@
 #ifndef THE_SPIRE_MONSTERS_H
 #define THE_SPIRE_MONSTERS_H
 
-#include "../effects/effects.h"
-
 struct monster_ {
     int id;
     int hp;
@@ -16,6 +14,8 @@ struct monster_ {
 };
 
 typedef struct monster_ *monster;
+
+#include "../effects/effects.h"
 
 //First half monsters
 monster createJawurm1();
