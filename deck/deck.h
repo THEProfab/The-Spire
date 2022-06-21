@@ -18,7 +18,23 @@ typedef struct deck_ * deck;
 deck createDeck(cards card);
 void addCard(deck currentDeck, cards card);
 void displayDeck(deck deck);
-cards * returnDeck(deck deck);
-cards shuffle(cards tabDeck[21]);
+cards * returnDeckTab(deck deck);
+deck returnDeck(cards *tabDeck);
+cards shuffle(cards deck[21]);
+
+//TODO : pour marc
+deck startingDeck();
+cards createStrike();
+cards createEsquive();
+cards createDoubleStrike();
+cards createBouleDeFeu();
+cards createCoupAffaiblissant();
+cards createAcceleration();
+cards createSurmenage();
+cards createPostureDefensive();
+cards createConcentration();
+cards createIncendie();
+cards createPulveriser();
+cards createSpectreComplet();
 
 #endif //THE_SPIRE_DECK_H

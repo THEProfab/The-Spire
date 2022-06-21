@@ -44,6 +44,8 @@ void cardActivation(cards card,monster monster)
             strength(card->effect[i]->value,monster);
         if (card->effect[i]->type==7)
             dexterity(card->effect[i]->value,monster);
+        if (card->effect[i]->type==8)
+            mana(card->effect[i]->value);
         i++;
     }while(card->effect[i]!=NULL);
 
