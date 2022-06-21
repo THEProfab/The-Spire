@@ -1,7 +1,4 @@
 #include "main.h"
-//#include "../monsters/monsters.h"
-
-//#include "../tower/tower.h"
 
 void newGame(){
     srand(time(NULL));
@@ -17,19 +14,24 @@ void newGame(){
     playerFire = basicPlayerFire;
     playerWeak = basicPlayerWeak;
     playerSlow = basicPlayerSlow;
-    //items = {} voir le code de 16 pour compléter -> casse croûte
+    tabItems = {NULL,NULL,NULL,NULL,NULL};
 
-    // création du deck
-    effects effects[0]=newEffect(1,6);
-    newCard("Strike","basique",effects,1,0,"Inflige 6 dégâts","L’attaque de base",FALSE);
+    // add the sandwich to the table of items
+    effects tabEffects = {NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+    tabEffects[0] = newEffect(9,6);
+    items sandwich = newItem("casseCroute",tabEffects,"miam");
+    tabItems[0] = sandwich;
 
-    // room room = createTower();
+    // creation of the starting deck
     
-    // while (room->monster->name != "Keeper of the Feather")
-    // {
-    //     room = goNextFloor(room);
-    //     fight(room->monster);
-    // }
+
+    room room = createTower();
+    
+    while (room->monster->name != "Keeper of the Feather")
+    {
+        room = goNextFloor(room);
+        fight(room->monster);
+    }
 
     displayMainMenu();
 }

@@ -4,17 +4,71 @@
 
 // }
 
-// void draw(){
+void draw(deck draw, deck hand, deck discardPile){
+    
+    while ()
+    {
+        /* code */
+    }
+}
 
-// }
-
-void turn(int turn, monster monster){
-    printf("Tour %d", turn);
+void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
+    printf("Tour %d\n", turn);
     printf("hp : Peter %d %s %d\n", currentPlayerHP, monster->name, monster->hp);
 
-    // choix de l'action du monstre, en attente du codage des attaques des monstres
-    // printf("") annonce du choix de l'action du monstre
+    currentPlayerEnergy = maxPlayerEnergy;
 
+    int randomValue = 0;
+    switch (monster->id)
+    {
+        case 0:
+            randomValue = rand() % 3;
+            announceAbilityJawurm1(randomValue);
+            break;
+
+        case 1:
+            randomValue = rand() % 2;
+            announceAbilityBlouni(randomValue);
+            break;
+
+        case 2:
+            randomValue = rand() % 2;
+            announceAbilityKeliko(randomValue);
+            break;
+
+        case 3:
+            randomValue = rand() % 3;
+            announceAbilityJawurm2(randomValue);
+            break;
+
+        case 4:
+            randomValue = rand() % 2;
+            announceAbilityRedoni(randomValue);
+            break;
+
+        case 5:
+            announceAbilityMangoustine(randomValue);
+            break;
+
+        case 6:
+            randomValue = rand() % 3;
+            announceAbilityEldan(randomValue);
+            break;
+
+        case 7:
+            randomValue = rand() % 2;
+            announceAbilityPyrox(randomValue);
+            break;
+
+        case 8:
+            randomValue = rand() % 4;
+            announceAbilityKeeperOfTheFeather(randomValue);
+            break;
+        
+        default:
+            break;
+    }
+    
     // piocher 5 cartes
     // deck hand -> création de la main avec la structure de deck puis assage du pointeur à la fonction de pioche ?
 
@@ -22,45 +76,127 @@ void turn(int turn, monster monster){
     // demander au joueur la carte qu'il souhaite jouer ou s'il souhaite finir son tour
     // vérifier s'il peut jouer une carte
 
-    // prendre en compte les effets / réduire si nécessaire
+    int playerHPBefore = currentPlayerHP;
+
+    switch (monster->id)
+    {
+        case 0:
+            jawurm1Abilities(randomValue);
+            break;
+
+        case 1:
+            blouniAbilities(randomValue)
+            break;
+
+        case 2:
+            kelikoAbilities(randomValue)
+            break;
+
+        case 3:
+            jawurm2Abilities(randomValue)
+            break;
+
+        case 4:
+            redoniAbilities(randomValue)
+            break;
+
+        case 5:
+            mangoustineAbilities(randomValue)
+            break;
+
+        case 6:
+            eldanAbilities(randomValue)
+            break;
+
+        case 7:
+            pyroxAbilities(randomValue)
+            break;
+
+        case 8:
+            keeperOfTheFeatherAbilities(randomValue)
+            break;
+        
+        default:
+            break;
+    }
+
+    // if player has dodge, he takes less damage
+    if (currentPlayerHP < playerHPBefore)
+    {
+        if (currentPlayerDodge > 0)
+        {
+            int diffHP = playerHPBefore-currentPlayerHP;
+            if (diffHP < currentPlayerDodge)
+            {
+                currentPlayerHP += diffHP;
+                currentPlayerDodge -= diffHP;
+            }
+            else
+            {
+                currentPlayerHP += currentPlayerDodge;
+                currentPlayerDodge = 0;
+            }
+        }
+    }
+
+    // at the end of the turn, dodge returns to 0
+    currentPlayerDodge = 0;
 
     // mettre les cartes non jouées dans la défausse
 
 }
 
-void fight(deck deck, monster monster){
-    displayDeck(deck);
+void fight(deck currentDeck, monster monster){
+    displayDeck(currentDeck);
     printf("Peter affronte : %s\n", monster->name);
     printf("hp : Peter %d %s %d\n", currentPlayerHP, monster->name, monster->hp);
 
-    if (currentPlayerHP < maxPlayerHP){
-        printf("Peter récupère 6 hp grâce au casse-croûte !\n");
-        int testSustain = (currentPlayerHP + 6)%maxPlayerHP; // test pour voir si on dépasse le max d'hp
-        if (testSustain>=1 && testSustain<=5){
-            currentPlayerHP += 6-testSustain;
-        } else {
-            currentPlayerHP += 6;
+    for (int i = 0; i < 5; i++)
+    {
+        if (tabItems[i] != NULL)
+        {
+            items item = tabItems[i];
+            if (item->active == 0)
+            {
+                itemPower(item);
+            }
         }
     }
+    currentPlayerMana = maxPlayerMana;
+
+    deck startDeck = currentDeck;
+    deck draw = createDeck(currentDeck->card);
+    deck startDraw = draw;
+
+    deck discardPile = NULL;
+    deck abysses = NULL;
+
+    // filling the draw with the current deck
+    while (currentDeck->next != NULL){
+        currentDeck = currentDeck->next;
+        draw = draw->next;
+        draw->card = currentDeck->card;
+    }
+
+    draw = startDraw;
+
+    // shuffling the draw
+    cards *drawTab = returnDeckTab(draw);
+    drawTab = shuffle(drawTab);
+    draw = returnDeck(drawTab);
 
     int turnNb = 1;
     while (monster->hp>0 && currentPlayerHP>0)
     {
-        turn(turnNb, monster);
+        turn(turnNb, monster, draw, discardPile, abysses);
         turnNb++;
     }
 
     if (currentPlayerHP==0)
     {
-        printf("Game over !\n");
+        printf("Vous êtes mort !\n");
     } else if (monster->hp==0) {
+        printf("Victoire de Peter !\n");
         // choisir une nouvelle carte parmi 3 à ajouter au deck
     }
-    
-    
-    // appliquer effets objets
-    // vérification présence casse croûte ?
-
-    // pioche = deck actuel
-    // qui a gagné ?
 }

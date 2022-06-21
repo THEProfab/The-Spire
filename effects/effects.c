@@ -68,9 +68,17 @@ void dexterity(int value, monster monster)
         monster->dexterity+=value;
 }
 
-void sandwich(int value)
+void sandwich()
 {
-    currentPlayerHP+=value;
+    if (currentPlayerHP < maxPlayerHP){
+        printf("Peter récupère 6 hp grâce au casse-croûte !\n");
+        int testSustain = (currentPlayerHP + 6)%maxPlayerHP; // test pour voir si on dépasse le max d'hp
+        if (testSustain>=1 && testSustain<=5){
+            currentPlayerHP += 6-testSustain;
+        } else {
+            currentPlayerHP += 6;
+        }
+    }
 }
 
 void strengthDef(int value)
