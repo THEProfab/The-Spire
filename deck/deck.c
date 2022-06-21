@@ -127,14 +127,14 @@ deck startingDeck() {
  * @param decks
  * @return
  */
-deck strikeIntoEsquive(deck decks) {
+deck strikeIntoEsquive(deck decks,bool choice) {
     deck startDeck = decks;
     char *strike = "Strike";
     char *esquive = "Esquive";
     while (decks != NULL) {
-        if (decks->card->name == strike)
+        if ((decks->card->name == strike)&&(choice==0))
             decks->card = createEsquive();
-        else if (decks->card->name == esquive)
+        else if ((decks->card->name == esquive)&&(choice==1))
             decks->card = createStrike();
         decks = decks->next;
     }
