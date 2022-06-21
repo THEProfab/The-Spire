@@ -36,10 +36,11 @@ void weakness(int value, monster monster);
 void slowness(int value, monster monster);
 void strength(int value, monster monster);
 void dexterity(int value, monster monster);
-void sandwich(int value);
+void sandwich();
 void strengthDef(int value);
 void dexterityDef(int value);
 void powerMax(int value);
 void HPMax(int value);
+void mana(int value);
 
 #endif //THE_SPIRE_EFFECTS_H

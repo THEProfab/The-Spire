@@ -2,7 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../monsters/monsters.h"
-//#include "../deck/deck.h"
+#include "../deck/deck.h"
+#include "../items/items.h"
 
 // stats de base du joueur
 #define basicCurrentPlayerHP 75
@@ -30,7 +31,8 @@ extern int playerDexterity;
 extern int playerFire;
 extern int playerWeak;
 extern int playerSlow;
-//item items[5];
+extern items tabItems[5];
 
-void turn(int turnNb, monster monster);
-void fight(monster monster);
+void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses);
+void fight(deck currentDeck, monster monster);
+void drawCard(deck draw, deck hand, deck discardPile);
