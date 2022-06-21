@@ -164,3 +164,11 @@ void powerMax(int value) {
 void HPMax(int value) {
     maxPlayerHP += value;
 }
+
+/**
+ * make the mana great again effect
+ * @param value
+ */
+void manaMax(int value) {
+    maxPlayerMana += value;
+}
