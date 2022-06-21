@@ -6,6 +6,8 @@
 #define THE_SPIRE_CARDS_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../effects/effects.h"
 
 struct cards_ {
@@ -22,6 +24,7 @@ struct cards_ {
 typedef struct cards_ * cards;
 
 cards newCard(char* name,int rarity,effects effect[8],int costEnergy,int costMana,char* textTech,char* textDescription,bool abyssal);
-void cardActivation(cards card,monster monster);
+void affichageCard(cards card);
+bool cardActivation(cards card,monster monster);
 
 #endif //THE_SPIRE_CARDS_H

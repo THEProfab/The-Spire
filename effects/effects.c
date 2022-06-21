@@ -100,3 +100,11 @@ void HPMax(int value)
 {
     maxPlayerHP+=value;
 }
+
+void mana(int value)
+{
+    if (maxPlayerMana<=currentPlayerMana+value)
+        currentPlayerMana+=value;
+    else
+        currentPlayerMana=maxPlayerMana;
+}

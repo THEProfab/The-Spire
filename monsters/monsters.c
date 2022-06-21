@@ -19,8 +19,12 @@ monster createJawurm1() {
     return newMonster;
 }
 
-void jawurm1Abilities(monster jawurm) {
-    int randomValue = rand() % 3;
+/**
+ * Randomly casts a Jawurm's ability
+ * @param jawurm user/target monster
+ * @param randomValue corresponding to the ability
+*/
+void jawurm1Abilities(monster jawurm, int randomValue) {
     if (randomValue == 0) {
         damage(11, NULL);
     } else if (randomValue == 1) {
@@ -29,6 +33,20 @@ void jawurm1Abilities(monster jawurm) {
     } else if (randomValue == 2) {
         strength(3, jawurm);
         dodge(6, jawurm);
+    }
+}
+
+/**
+ * Announce the next ability the Jawurm will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityJawurm1(int randomValue) {
+    if (randomValue == 0) {
+        printf("Degats : 11\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 7, Esquive : 5\n");
+    } else if (randomValue == 2) {
+        printf("Force : 3, Esquive : 6\n");
     }
 }
 
@@ -48,13 +66,29 @@ monster createBlouni() {
     return newMonster;
 }
 
-void blouniAbilities(monster blouni) {
-    int randomValue = rand() % 2;
+/**
+ * Randomly casts a Blouni's ability
+ * @param blouni user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void blouniAbilities(monster blouni, int randomValue) {
     if (randomValue == 0) {
         damage(13, NULL);
     } else if (randomValue == 1) {
         damage(8, NULL);
         weakness(2, NULL);
+    }
+}
+
+/**
+ * Announce the next ability the Blouni will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityBlouni(int randomValue) {
+    if (randomValue == 0) {
+        printf("Degats : 13\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 8, Faiblesse : 2\n");
     }
 }
 
@@ -74,8 +108,12 @@ monster createKeliko() {
     return newMonster;
 }
 
-void kelikoAbilities(monster keliko) {
-    int randomValue = rand() % 2;
+/**
+ * Randomly casts a Keliko's ability
+ * @param keliko user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void kelikoAbilities(monster keliko, int randomValue) {
     if (randomValue == 0) {
         damage(3, NULL);
         dodge(3, keliko);
@@ -84,6 +122,18 @@ void kelikoAbilities(monster keliko) {
         damage(3, NULL);
         dodge(3, keliko);
         dexterity(2, keliko);
+    }
+}
+
+/**
+ * Announce the next ability the Keliko will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityKeliko(int randomValue) {
+    if (randomValue == 0) {
+        printf("Degats : 3, Esquive : 3, Force : 3\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 3, Esquive : 3, Dexterite : 3\n");
     }
 }
 
@@ -104,8 +154,12 @@ monster createJawurm2() {
     return newMonster;
 }
 
-void jawurm2Abilities(monster jawurm) {
-    int randomValue = rand() % 3;
+/**
+ * Randomly casts a Jawurm's ability
+ * @param jawurm user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void jawurm2Abilities(monster jawurm, int randomValue) {
     if (randomValue == 0) {
         damage(15, NULL);
     } else if (randomValue == 1) {
@@ -114,6 +168,20 @@ void jawurm2Abilities(monster jawurm) {
     } else if (randomValue == 2) {
         strength(3, jawurm);
         dodge(18, jawurm);
+    }
+}
+
+/**
+ * Announce the next ability the Jawurm will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityJawurm2(int randomValue) {
+    if (randomValue == 0) {
+        printf("Degats : 15\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 12, Esquive : 10\n");
+    } else if (randomValue == 2) {
+        printf("Force : 3, Esquive : 18\n");
     }
 }
 
@@ -133,13 +201,29 @@ monster createRedoni() {
     return newMonster;
 }
 
-void redoniAbilities(monster redoni) {
-    int randomValue = rand() % 2;
+/**
+ * Randomly casts a Redoni's ability
+ * @param redoni user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void redoniAbilities(monster redoni, int randomValue) {
     if (randomValue == 0) {
         damage(20, NULL);
     } else if (randomValue == 1) {
         damage(15, NULL);
         weakness(2, NULL);
+    }
+}
+
+/**
+ * Announce the next ability the Redoni will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityRedoni(int randomValue) {
+    if (randomValue == 0) {
+        printf("Degats : 20\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 15, Faiblesse : 2\n");
     }
 }
 
@@ -159,11 +243,24 @@ monster createMangoustine() {
     return newMonster;
 }
 
+/**
+ * Randomly casts a Mangounstine's ability
+ * @param mangoustine user/target monster
+ * @param randomValue corresponding to the ability
+ */
 void mangoustineAbilities(monster mangoustine) {
     damage(3, NULL);
     dodge(3, mangoustine);
     strength(2, mangoustine);
     dexterity(2, mangoustine);
+}
+
+/**
+ * Announce the next ability the Mangoustine will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityMangoustine(int randomValue) {
+    printf("Degats : 3, Esquive : 3, Force : 2, Dexterite : 2\n");
 }
 
 //Minibosses
@@ -181,8 +278,12 @@ monster createEldan() {
     return newMonster;
 }
 
-void eldanAbilities(monster eldan) {
-    int randomValue = rand() % 3;
+/**
+ * Randomly casts an Eldan's ability
+ * @param eldan user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void eldanAbilities(monster eldan, int randomValue) {
     if (randomValue == 0) {
         damage(15, NULL);
     } else if (randomValue == 1) {
@@ -193,6 +294,20 @@ void eldanAbilities(monster eldan) {
         slowness(2, NULL);
         strength(-1, NULL);
         dexterity(-1, NULL);
+    }
+}
+
+/**
+ * Announce the next ability the Eldan will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityEldan(int randomValue) {
+    if (randomValue == 0) {
+        printf("Degats : 15\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 10, Esquive : 15\n");
+    } else if (randomValue == 2) {
+        printf("Faiblesse : 2, Lenteur : 2, Force : -1, Dexterite : -1\n");
     }
 }
 
@@ -210,14 +325,30 @@ monster createPyrox() {
     return newMonster;
 }
 
-void pyroxAbilities(monster pyrox) {
-    int randomValue = rand() % 2;
+/**
+ * Randomly casts a Pyrox's ability
+ * @param pyrox user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void pyroxAbilities(monster pyrox, int randomValue) {
     if (randomValue == 0) {
         fire(5, NULL);
         dodge(10, pyrox);
     } else if (randomValue == 1) {
         fire(10, NULL);
         dexterity(2, pyrox);
+    }
+}
+
+/**
+ * Announce the next ability the Pyrox will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityPyrox(int randomValue) {
+    if (randomValue == 0) {
+        printf("Feu : 5, Esquive : 10\n");
+    } else if (randomValue == 1) {
+        printf("Feu : 10, Dexterite : 2\n");
     }
 }
 
@@ -236,8 +367,12 @@ monster createKeeperOfTheFeather() {
     return newMonster;
 }
 
-void keeperOfTheFeatherAbilities(monster keeperOfTheFeather) {
-    int randomValue = rand() % 4;
+/**
+ * Randomly casts a Keeper of the Feather's ability
+ * @param keeperOfTheFeather user/target monster
+ * @param randomValue corresponding to the ability
+ */
+void keeperOfTheFeatherAbilities(monster keeperOfTheFeather, int randomValue) {
     if (randomValue == 0) {
         fire(3, NULL);
         damage(6, NULL);
@@ -258,54 +393,54 @@ void keeperOfTheFeatherAbilities(monster keeperOfTheFeather) {
     }
 }
 
+/**
+ * Announce the next ability the Keeper of the Feather will use
+ * @param randomValue corresponding to the ability
+ */
+void announceAbilityKeeperOfTheFeather(int randomValue) {
+    if (randomValue == 0) {
+        printf("Feu : 3, Degats : 6, Force : 1, Lenteur : 1, Faiblesse : 1, Dexterite : 1, Esquive : 5\n");
+    } else if (randomValue == 1) {
+        printf("Degats : 30\n");
+    } else if (randomValue == 2) {
+        printf("5 x Dégats : 4\n");
+    }
+}
+
+
+
+//First half monsters array
 monster (*monsterArrayFirstHalf[3])() = {createJawurm1, createBlouni, createKeliko};
 
+//Second half monsters array
 monster (*monsterArraySecondHalf[3])() = {createJawurm2, createRedoni, createMangoustine};
 
+//Miniboss array
 monster (*miniBossArray[2])() = {createEldan, createPyrox};
 
+/**
+ * Pick a random monster from the first half
+ * @return a monster from the array (jawurm1, blouni or keliko)
+ */
 monster pickAMonster13() {
     int randomVariable = (int) rand() % 3;
     return monsterArrayFirstHalf[randomVariable]();
 }
 
+/**
+ * Pick a random monster from the second half
+ * @return a monster from the array (jawurm2, redoni or mangoustine)
+ */
 monster pickAMonster59() {
     int randomVariable = (int) rand() % 3;
     return monsterArraySecondHalf[randomVariable]();
 }
 
+/**
+ * Pick a random miniboss
+ * @return a miniboss from the array (eldan or pyrox)
+ */
 monster pickAMiniBoss() {
     int randomVariable = (int) rand() % 2;
     return miniBossArray[randomVariable]();
-}
-
-void monsterMain() {
-    monster jawurm = createJawurm1();
-    printf("Jawurm name : %s \n", jawurm->name);
-    printf("Jawurm id : %d \n", jawurm->id);
-    printf("Jawurm hp : %d \n", jawurm->hp);
-    printf("Jawurm strength : %d \n", jawurm->strength);
-    printf("Jawurm dodge : %d \n", jawurm->dodge);
-    printf("Jawurm dexterity : %d \n", jawurm->dexterity);
-    printf("Jawurm fire : %d \n", jawurm->fire);
-    printf("Jawurm slow : %d \n", jawurm->slow);
-    printf("Jawurm weak : %d \n", jawurm->weak);
-
-
-    monster blouni = createBlouni();
-    printf("blouni name : %s \n", blouni->name);
-    monster keliko = createKeliko();
-    printf("keliko name : %s \n", keliko->name);
-    monster jawurm2 = createJawurm2();
-    printf("jawurm2 name : %s \n", jawurm2->name);
-    monster redoni = createRedoni();
-    printf("redoni name : %s \n", redoni->name);
-    monster mangoustine = createMangoustine();
-    printf("mangoustine name : %s \n", mangoustine->name);
-    monster eldan = createEldan();
-    printf("eldan name : %s \n", eldan->name);
-    monster pyrox = createPyrox();
-    printf("pyrox name : %s \n", pyrox->name);
-    monster keeperOfTheFeather = createKeeperOfTheFeather();
-    printf("KeeperOfTheFeather name : %s \n", keeperOfTheFeather->name);
 }
