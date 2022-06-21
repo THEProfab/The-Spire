@@ -3,8 +3,14 @@
 //
 #include "items.h"
 
-
-items newItem(char* name,effects effect,char* textDescription) {
+/**
+ * create a new item
+ * @param name
+ * @param effect
+ * @param textDescription
+ * @return
+ */
+items newItem(char *name, effects effect, char *textDescription) {
 
     items new = malloc(sizeof(items));
     new->name=name;
@@ -15,6 +21,10 @@ items newItem(char* name,effects effect,char* textDescription) {
     return new;
 }
 
+/**
+ * do the effect of an item
+ * @param item
+ */
 void itemPower(items item)
 {
     if (item->effect->type==9)
