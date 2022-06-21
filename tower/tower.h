@@ -1,4 +1,9 @@
 #include "../monsters/monsters.h"
+#include "../deck/deck.h"
+#include "../effects/effects.h"
+#include <stdbool.h>
+
+
 
 #ifndef TOWER_TOWER_H
 #define TOWER_TOWER_H
@@ -29,11 +34,11 @@ void createTowerBoucle(room previous1, room previous2, room previous3, room prev
 
 room createTower();
 
-room goNextFloor(room actualRoom);
+room goNextFloor(room actualRoom,deck deck);
 
 room menuChoixNextSalle(room actualRoom, int event);
 
-void onEvent(room actualRoom);
+void onEvent(room actualRoom,deck deck);
 
 void eventTP(room actualRoom);
 
