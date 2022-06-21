@@ -6,6 +6,8 @@
 #define THE_SPIRE_CARDS_H
 
 #include <stdbool.h>
+#include <stdio.h>
+#include <stdlib.h>
 #include "../effects/effects.h"
 
 struct cards_ {

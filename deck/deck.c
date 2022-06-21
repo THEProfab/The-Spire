@@ -66,19 +66,23 @@ deck returnDeck(cards *tabDeck)
 
 // fin.
 
-cards shuffle(cards *tabDeck)
+cards * shuffle(cards *tabDeck)
 {
     srand(time(NULL));
-    int seed[21];
-    for (int i=0;i<21;i++)
+    int seed[sizeof(tabDeck)];
+    int i=0;
+    while(i<sizeof(seed))
     {
         seed[i]=rand()%22;  //seed initialising
+        i++;
     }
-    for (int i=0;i<21;i++)   //exchange the the first card with the number in the seed card
+    i=0;
+    while(i<sizeof(tabDeck))   //exchange the first card with the number in the seed card
     {
         cards cardChange=tabDeck[i];
         tabDeck[i]=tabDeck[seed[i]];
         tabDeck[seed[i]]=cardChange;
+        i++;
     }
     return tabDeck;
 }
@@ -89,11 +93,11 @@ cards shuffle(cards *tabDeck)
 
 deck startingDeck()
 {
-    deck deck;
     cards cardStrike = createStrike();
     cards cardEsquive = createEsquive();
     cards cardSpectreComplet = createSpectreComplet();
-    for (int i=0;i<5;i++)
+    deck deck = createDeck(cardStrike);
+    for (int i=0;i<4;i++)
     {
         addCard(deck,cardStrike);
     }
@@ -103,6 +107,22 @@ deck startingDeck()
     }
     addCard(deck,cardSpectreComplet);
     return deck;
+}
+
+deck strikeIntoEsquive(deck decks)
+{
+    deck startDeck = decks;
+    char* strike="Strike";
+    char* esquive="Esquive";
+    while(decks!=NULL)
+    {
+        if (decks->card->name==strike)
+            decks->card=createEsquive();
+        else if (decks->card->name==esquive)
+            decks->card=createStrike();
+        decks=decks->next;
+    }
+    return startDeck;
 }
 
 cards createStrike()
@@ -212,3 +232,18 @@ cards createSpectreComplet()
     cards card = newCard("Spectre complet",4,effect,2,20,"Donne différents bonus. Abyssal.","Un bonus pour chaque couleur de l’arc-en-ciel.Un bonus pour chaque couleur de l’arc-en-ciel.",1);
     return card;
 }
+
+cards createMartinsFury()
+{
+    effects effect[8]={NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL};
+    effect[0] = newEffect(1,999);
+    effect[2] = newEffect(1,999);
+    effect[3] = newEffect(1,999);
+    effect[4] = newEffect(1,999);
+    effect[5] = newEffect(1,999);
+    effect[6] = newEffect(1,999);
+    effect[7] = newEffect(1,999);
+    cards card = newCard("Martin's Fury",5,effect,0,0,"Détruit l'adversaire","wow référence",1);
+    return card;
+}
+

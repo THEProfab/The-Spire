@@ -49,9 +49,10 @@ void affichageCard(cards card)
     {
         printf("special\n");
     }
-
     printf("text technique : %s\n",card->textTech);
     printf("text descriptif : %s\n",card->textDescription);
+    if (card->abyssal==true)
+        printf("abyssal\n");
 }
 
 bool cardActivation(cards card,monster monster)
@@ -62,7 +63,7 @@ bool cardActivation(cards card,monster monster)
     }
     else
     {
-        printf("pas assez d'energy !!!!!");
+        printf("pas assez d'energy !!!!!\n");
         return false;
     }
     if (card->costMana>currentPlayerMana)
@@ -71,7 +72,7 @@ bool cardActivation(cards card,monster monster)
     }
     else
     {
-        printf("pas assez de mana !!!!!");
+        printf("pas assez de mana !!!!!\n");
         return false;
     }
     printf("Activation de %s\n",card->name);
