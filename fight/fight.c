@@ -45,6 +45,28 @@ void playCard(deck hand, int* handSize, monster monster){
         {
             prevHand->next = hand->next;
         }
+
+        // putting the played card into the abysses or the discard pile
+        if (hand->card->abyssal)
+        {
+            if (abysses == NULL)
+            {
+                abysses = createDeck(hand->card);
+            } else 
+            {
+                addCard(abysses, hand->card);
+            }  
+        } else
+        {
+            if (discardPile == NULL)
+            {
+                discardPile = createDeck(hand->card);
+            } else
+            {
+                addCard(discardPile, hand->card);
+            }
+        }
+
         (*handSize)--;
     }
 
