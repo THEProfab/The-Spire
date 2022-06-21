@@ -105,7 +105,6 @@ void dexterity(int value, monster monster) {
 /**
  * returns mana
  * @param value
- * @param monster
  */
 void mana(int value) {
     if (maxPlayerMana <= currentPlayerMana + value)
@@ -116,11 +115,18 @@ void mana(int value) {
 
 /**
  * apply the sandwich effect
- * @param value
- * @param monster
  */
-void sandwich(int value) {
-    currentPlayerHP += value;
+void sandwich()
+{
+    if (currentPlayerHP < maxPlayerHP){
+        printf("Peter récupère 6 hp grâce au casse-croûte !\n");
+        int testSustain = (currentPlayerHP + 6)%maxPlayerHP; // test to see if we overtake the HP limit
+        if (testSustain>=1 && testSustain<=5){
+            currentPlayerHP += 6-testSustain;
+        } else {
+            currentPlayerHP += 6;
+        }
+    }
 }
 
 /**

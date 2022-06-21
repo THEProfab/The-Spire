@@ -10,8 +10,8 @@
 struct items_ {
     char *name;
     effects effect;
-    char *textDescription;
-
+    char* textDescription;
+    int active;
 };
 typedef struct items_ *items;
 
