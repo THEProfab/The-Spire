@@ -328,6 +328,91 @@ void fight(deck currentDeck, monster monster){
         printf("Vous êtes mort !\n");
     } else if (monster->hp==0) {
         printf("Victoire de Peter !\n");
-        // choisir une nouvelle carte parmi 3 à ajouter au deck
+
+        // chosing 3 cards randomly
+        deck toChose = NULL;
+        deck startChose = toChose;
+        for (int i = 0; i < 2; i++)
+        {
+            int randomValue = rand() % 12;
+
+            switch (randomValue)
+            {
+            case 0:
+                cards card = createStrike();
+                break;
+            case 1:
+                cards card = createEsquive();
+                break;
+            case 2:
+                cards card = createDoubleStrike();
+                break;
+            case 3:
+                cards card = createBouleDeFeu();
+                break;
+            case 4:
+                cards card = createCoupAffaiblissant();
+                break;
+            case 5:
+                cards card = createAcceleration();
+                break;
+            case 6:
+                cards card = createSurmenage();
+                break;
+            case 7:
+                cards card = createPostureDefensive();
+                break;
+            case 8:
+                cards card = createConcentration();
+                break;
+            case 9:
+                cards card = createIncendie();
+                break;
+            case 10:
+                cards card = createPulveriser();
+                break;
+            case 11:
+                cards card = createSpectreComplet();
+                break;
+            
+            default:
+                // easter egg
+                cards card = createMartinsFury();
+                break;
+            }
+
+            if (toChose == NULL)
+            {
+                toChose = createDeck(card);
+                startChose = toChose;
+            } else
+            {
+                addCard(toChose, card);
+            }  
+        }
+        toChose = startChose;
+
+        printf("Voici 3 cartes :\n");
+        while(toChose != NULL){
+            affichageCard(toChose->card);
+            toChose = toChose->next;
+        }
+        toChose = startChose;
+
+        printf("Choisissez-en une à ajouter à votre deck (de 1 à 3) :\n");
+        int choice = 0;
+        scanf_s("%d", &choice);
+        while (choice<1 || choice>3)
+        {
+            printf("Veuillez entrer un numéro valide (entre 1 et 3) !");
+            scanf_s("%d", &choice);
+        }
+
+        for (int i = 1; i < choice; i++)
+        {
+            toChose = toChose->next;
+        }
+        
+        addCard(currentDeck, toChose->card);
     }
 }
