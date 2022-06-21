@@ -33,5 +33,6 @@ extern int playerWeak;
 extern int playerSlow;
 extern items tabItems[5];
 
-void turn(int turnNb, monster monster);
-void fight(monster monster);
+void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses);
+void fight(deck currentDeck, monster monster);
+void drawCard(deck draw, deck hand, deck discardPile);

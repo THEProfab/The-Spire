@@ -4,11 +4,37 @@
 
 // }
 
-void draw(deck draw, deck hand, deck discardPile){
-    
-    while ()
+// draw a card
+void drawCard(deck draw, deck hand, deck discardPile){
+    deck startDraw = draw;
+
+    // refilling the draw with the discard pile
+    if (draw->next == NULL)
     {
-        /* code */
+        // shuffling the discard pile
+        cards *discardTab = returnDeckTab(discardPile);
+        discardTab = shuffle(drawTab);
+        discardPile = returnDeck(drawTab);
+
+        while (discardPile != NULL)
+        {
+            addCard(draw, discardPile->card);
+            discardPile = discardPile->next;
+        }
+
+        draw = startDraw;
+    }
+
+    if (hand == NULL)
+    {
+        hand = createDeck(draw->card);
+        draw = draw->next;
+    } else
+    {
+        deck startHand = hand;
+        addCard(hand, draw->card);
+        draw = draw->next;
+        hand = startHand;
     }
 }
 
@@ -69,8 +95,13 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
             break;
     }
     
-    // piocher 5 cartes
-    // deck hand -> création de la main avec la structure de deck puis assage du pointeur à la fonction de pioche ?
+    // draw 5 cards
+    deck hand = NULL;
+    drawCard(draw, hand, discardPile);
+    drawCard(draw, hand, discardPile);
+    drawCard(draw, hand, discardPile);
+    drawCard(draw, hand, discardPile);
+    drawCard(draw, hand, discardPile);
 
     // jouer cartes
     // demander au joueur la carte qu'il souhaite jouer ou s'il souhaite finir son tour

@@ -23,14 +23,14 @@ void newGame(){
     tabItems[0] = sandwich;
 
     // creation of the starting deck
-    
+    deck currentDeck = startingDeck();
 
     room room = createTower();
     
     while (room->monster->name != "Keeper of the Feather")
     {
         room = goNextFloor(room);
-        fight(room->monster);
+        fight(currentDeck, room->monster);
     }
 
     displayMainMenu();
