@@ -22,6 +22,7 @@ struct cards_ {
 typedef struct cards_ * cards;
 
 cards newCard(char* name,int rarity,effects effect[8],int costEnergy,int costMana,char* textTech,char* textDescription,bool abyssal);
-void cardActivation(cards card,monster monster);
+void affichageCard(cards card);
+bool cardActivation(cards card,monster monster);
 
 #endif //THE_SPIRE_CARDS_H

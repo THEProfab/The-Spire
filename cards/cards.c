@@ -26,8 +26,58 @@ cards newCard(char* name,int rarity,effects effect[8],int costEnergy,int costMan
     return new;
 }
 
-void cardActivation(cards card,monster monster)
+void affichageCard(cards card)
 {
+    printf("%s\n",card->name);
+    if (card->rarity==1)
+    {
+        printf("basique\n");
+    }
+    if (card->rarity==2)
+    {
+        printf("commune\n");
+    }
+    if (card->rarity==3)
+    {
+        printf("atypique\n");
+    }
+    if (card->rarity==4)
+    {
+        printf("rare\n");
+    }
+    if (card->rarity==5)
+    {
+        printf("special\n");
+    }
+
+    printf("text technique : %s\n",card->textTech);
+    printf("text descriptif : %s\n",card->textDescription);
+}
+
+bool cardActivation(cards card,monster monster)
+{
+    if (card->costEnegry>currentPlayerEnergy)
+    {
+        currentPlayerEnergy-=card->costEnegry;
+    }
+    else
+    {
+        printf("pas assez d'energy !!!!!");
+        return false;
+    }
+    if (card->costMana>currentPlayerMana)
+    {
+        currentPlayerMana-=card->costMana;
+    }
+    else
+    {
+        printf("pas assez de mana !!!!!");
+        return false;
+    }
+    printf("Activation de %s\n",card->name);
+    printf("text technique : %s\n",card->textTech);
+    printf("text descriptif : %s\n",card->textDescription);
+
     int i=0;
     do{
         if (card->effect[i]->type==1)
@@ -48,7 +98,7 @@ void cardActivation(cards card,monster monster)
             mana(card->effect[i]->value);
         i++;
     }while(card->effect[i]!=NULL);
-
+    return true;
 }
 
 /*
