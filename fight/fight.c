@@ -182,6 +182,8 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
         hand = hand->next;
     }
 
+    int monsterHPBefore = monster->hp;
+
     hand = startHand;
     int handSize = 5;
 
@@ -195,6 +197,33 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
         printf("1. Jouer une carte\n");
         printf("2. Fin du tour\n");
         scanf_s("%d", &choice);
+    }
+
+    // if the monster has dodge, it takes less damage
+    if (monster->hp < monsterHPBefore)
+    {
+        if (monster->dodge > 0)
+        {
+            int diffHP = monsterHPBefore-monster->hp;
+            if (diffHP < monster->dodge)
+            {
+                monster->hp += diffHP;
+                monster->dodge -= diffHP;
+            }
+            else
+            {
+                monster->hp += monster->dodge;
+                monster->dodge = 0;
+            }
+        }
+    }
+
+    monster->dodge = 0;
+
+    // if the monster has no more hp, the fight is finished
+    if (monster->hp == 0)
+    {
+        return;
     }
 
     int playerHPBefore = currentPlayerHP;

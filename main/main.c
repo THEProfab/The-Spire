@@ -49,7 +49,7 @@ void displayMainMenu(){
     printf("2. Crédits\n");
     printf("3. Quitter\n");
     printf("Que souhaitez-vous faire ? (entrez 1, 2 ou 3) ");
-    scanf("%d", &choice);
+    scanf_s("%d", &choice);
 
     if (choice == 1)
     {
