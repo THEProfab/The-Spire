@@ -1,8 +1,55 @@
 #include "fight.h"
 
-// void canPlay(cards card){
+void playCard(deck hand, int* handSize, monster monster){
+    deck startHand = hand;
+    printf("Votre main est actuellement constituée de :\n");
+    
+    while(hand != NULL){
+        affichageCard(hand->card);
+        hand = hand->next;
+    }
 
-// }
+    hand = startHand;
+    deck prevHand = NULL;
+
+    int choice = 0;
+    printf("Choisissez le numéro de la carte à jouer (de 1 à %d) : ", handSize);
+    scanf_s("%d", &choice);
+
+    while (choice>handSize || choice<1)
+    {
+        printf("Merci de choisir un numéro valide (de 1 à %d) : ", handSize);
+        scanf_s("%d", &choice);
+    }
+    
+    for (int i = 1; i < choice; i++)
+    {
+        prevHand = hand;
+        hand = hand->next;
+    }
+
+    bool played = cardActivation(hand->card, monster);
+
+    // removing the played card from the hand
+    if (played)
+    {
+        if (choice==1)
+        {
+            startHand = hand->next;
+        }
+        else if (choice==sizeHand)
+        {
+            prevHand->next = NULL;
+        }
+        else
+        {
+            prevHand->next = hand->next;
+        }
+        (*handSize)--;
+    }
+
+    hand = startHand;
+}
 
 // draw a card
 void drawCard(deck draw, deck hand, deck discardPile){
@@ -38,6 +85,7 @@ void drawCard(deck draw, deck hand, deck discardPile){
     }
 }
 
+// what's happening during a turn of a fight
 void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
     printf("Tour %d\n", turn);
     printf("hp : Peter %d %s %d\n", currentPlayerHP, monster->name, monster->hp);
@@ -103,9 +151,29 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
     drawCard(draw, hand, discardPile);
     drawCard(draw, hand, discardPile);
 
-    // jouer cartes
-    // demander au joueur la carte qu'il souhaite jouer ou s'il souhaite finir son tour
-    // vérifier s'il peut jouer une carte
+    deck startHand = hand;
+    
+    printf("Votre main est actuellement constituée de :\n");
+    
+    while(hand != NULL){
+        affichageCard(hand->card);
+        hand = hand->next;
+    }
+
+    hand = startHand;
+    int handSize = 5;
+
+    int choice = 0;
+    printf("1. Jouer une carte\n");
+    printf("2. Fin du tour\n");
+    scanf_s("%d", &choice);
+    while (choice != 2)
+    {
+        playCard(hand, &handSize, monster);
+        printf("1. Jouer une carte\n");
+        printf("2. Fin du tour\n");
+        scanf_s("%d", &choice);
+    }
 
     int playerHPBefore = currentPlayerHP;
 
@@ -173,8 +241,18 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
     // at the end of the turn, dodge returns to 0
     currentPlayerDodge = 0;
 
-    // mettre les cartes non jouées dans la défausse
-
+    // putting the unplayed cards into the discard pile
+    while (hand != NULL)
+    {
+        if (discardPile == NULL)
+        {
+            discardPile = createDeck(hand->card);
+        } else
+        {
+            addCard(discardPile, hand->card);
+        }
+        hand = hand->next;
+    }
 }
 
 void fight(deck currentDeck, monster monster){
