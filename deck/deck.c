@@ -146,12 +146,11 @@ deck onEventDeleteCard(deck decks) {
     deck startDeck=decks;
     displayDeck(decks);
     char *name;
-    int choice = 0;
     printf("Entrez le nom de la carte que vous voulez supprimer ");
     scanf_s("%d", &name);
     deck previous = NULL;
     while (decks != NULL) {
-        if (decks->card->name == choice)
+        if (decks->card->name == name)
             break;
         previous = decks;
 

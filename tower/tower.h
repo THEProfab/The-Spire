@@ -1,16 +1,13 @@
-#include "../monsters/monsters.h"
-#include "../deck/deck.h"
-#include "../effects/effects.h"
-#include <stdbool.h>
-
-
-
 #ifndef TOWER_TOWER_H
 #define TOWER_TOWER_H
 
 #include <stdlib.h>
 #include <time.h>
 #include <stdio.h>
+#include "../monsters/monsters.h"
+#include "../deck/deck.h"
+#include "../effects/effects.h"
+#include <stdbool.h>
 
 struct room_ {
     // Room parameters
