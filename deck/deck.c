@@ -127,17 +127,39 @@ deck startingDeck() {
  * @param decks
  * @return
  */
-deck strikeIntoEsquive(deck decks,bool choice) {
+deck strikeIntoEsquive(deck decks, bool choice) {
     deck startDeck = decks;
     char *strike = "Strike";
     char *esquive = "Esquive";
     while (decks != NULL) {
-        if ((decks->card->name == strike)&&(choice==0))
+        if ((decks->card->name == strike) && (choice == 0))
             decks->card = createEsquive();
-        else if ((decks->card->name == esquive)&&(choice==1))
+        else if ((decks->card->name == esquive) && (choice == 1))
             decks->card = createStrike();
         decks = decks->next;
     }
+    return startDeck;
+}
+
+deck onEventDeleteCard(deck decks) {
+
+    deck startDeck=decks;
+    displayDeck(decks);
+    char *name;
+    int choice = 0;
+    printf("Entrez le nom de la carte que vous voulez supprimer ");
+    scanf_s("%d", &name);
+    deck previous = NULL;
+    while (decks != NULL) {
+        if (decks->card->name == choice)
+            break;
+        previous = decks;
+
+        decks = decks->next;
+    }
+    if(previous==NULL){ startDeck=decks->next;}
+    else{previous->next=decks->next;}
+
     return startDeck;
 }
 

@@ -111,11 +111,11 @@ void createTowerBoucle(room previous1, room previous2, room previous3, room prev
  * @param actualRoom the current room
  * @return the next room as the actual room (actual room with updated parameters)
  */
-room goNextFloor(room actualRoom,deck deck) {
+room goNextFloor(room actualRoom, deck deck) {
     do {
         actualRoom = menuChoixNextSalle(actualRoom, 0);
         if (actualRoom->event != 0) {
-            onEvent(actualRoom,deck);
+            onEvent(actualRoom, deck);
         }
     } while (actualRoom->monster == NULL);
     return actualRoom;
@@ -186,7 +186,7 @@ room menuChoixNextSalle(room actualRoom, int event) {
  * Manages the events process (choices and consequences)
  * @param actualRoom the current room
  */
-void onEvent(room actualRoom,deck deck) {
+void onEvent(room actualRoom, deck deck) {
     int choice = 0;
     if (actualRoom->event == 1) {
         printf("Vous avez trouvez un sanctuaire !!!\n");
@@ -196,12 +196,17 @@ void onEvent(room actualRoom,deck deck) {
         scanf_s("%d", &choice);
         //TODO : Demander les fonctions
         if (choice == 1) {
-            //demandez une fonction
+            if (currentPlayerHP + (maxPlayerHP / 2) <= maxPlayerHP) {
+                currentPlayerHP = currentPlayerHP + (maxPlayerHP / 2);
+            }else {
+                currentPlayerHP = maxPlayerHP;
+            }
+
         } else if (choice == 2) {
-            //demandez une fonction
+            deck= onEventDeleteCard(deck);
         } else {
             printf("\nVous avez saisi un mauvais chiffre !\n\n");
-            onEvent(actualRoom,deck);
+            onEvent(actualRoom, deck);
         }
     } else if (actualRoom->event == 2) {
         printf("Un téléporteur se présente à Peter, mais impossible de savoir vers où il va!\n");
@@ -214,12 +219,12 @@ void onEvent(room actualRoom,deck deck) {
         //TODO : Demander à César comment faire
         scanf_s("%d", &choice);
         if (choice == 1) {
-            strikeIntoEsquive(deck,false);
+            strikeIntoEsquive(deck, false);
         } else if (choice == 2) {
-            strikeIntoEsquive(deck,true);
+            strikeIntoEsquive(deck, true);
         } else {
             printf("\nVous avez saisi un mauvais chiffre !\n\n");
-            onEvent(actualRoom,deck);
+            onEvent(actualRoom, deck);
         }
     } else if (actualRoom->event == 4) {
         printf("La salle est vide, mais dans un chaudron encore allumé, une potion est presqueprête. Comment la terminer?\n");
@@ -234,7 +239,7 @@ void onEvent(room actualRoom,deck deck) {
             manaMax(20);
         } else {
             printf("\nVous avez saisi un mauvais chiffre !\n\n");
-            onEvent(actualRoom,deck);
+            onEvent(actualRoom, deck);
         }
     } else if (actualRoom->event == 5) {
         printf("Vous avez découvert un miniboss en train de dormir !!!\n");
@@ -248,7 +253,7 @@ void onEvent(room actualRoom,deck deck) {
             printf("\nVous poursuivez votre chemin\n\n");
         } else {
             printf("\nVous avez saisi un mauvais chiffre !\n\n");
-            onEvent(actualRoom,deck);
+            onEvent(actualRoom, deck);
         }
     }
 }
