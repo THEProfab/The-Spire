@@ -28,8 +28,9 @@ deck returnDeck(cards *tabDeck);
 
 cards *shuffle(cards deck[21]);
 
-//TODO : pour marc
 deck startingDeck();
+
+deck strikeIntoEsquive(deck decks,bool choice);
 
 cards createStrike();
 

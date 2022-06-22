@@ -5,6 +5,7 @@
 #ifndef THE_SPIRE_EFFECTS_H
 #define THE_SPIRE_EFFECTS_H
 
+#include <stdio.h>
 #include <stdlib.h>
 #include "../monsters/monsters.h"
 
@@ -42,5 +43,6 @@ void dexterityDef(int value);
 void powerMax(int value);
 void HPMax(int value);
 void mana(int value);
+void manaMax(int value);
 
 #endif //THE_SPIRE_EFFECTS_H

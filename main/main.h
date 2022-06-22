@@ -18,7 +18,7 @@ int playerFire;
 int playerWeak;
 int playerSlow;
 
-items tabItems[5];
+items tabItems[5] = {NULL,NULL,NULL,NULL,NULL};
 
 void displayMainMenu();
 void newGame();

@@ -1,6 +1,6 @@
 #include "fight.h"
 
-void playCard(deck hand, int* handSize, monster monster){
+void playCard(deck hand, int* handSize, monster monster, deck discardPile, deck abysses){
     deck startHand = hand;
     printf("Votre main est actuellement constituée de :\n");
     
@@ -13,12 +13,12 @@ void playCard(deck hand, int* handSize, monster monster){
     deck prevHand = NULL;
 
     int choice = 0;
-    printf("Choisissez le numéro de la carte à jouer (de 1 à %d) : ", handSize);
+    printf("Choisissez le numéro de la carte à jouer (de 1 à %d) : ", *handSize);
     scanf_s("%d", &choice);
 
-    while (choice>handSize || choice<1)
+    while (choice>*handSize || choice<1)
     {
-        printf("Merci de choisir un numéro valide (de 1 à %d) : ", handSize);
+        printf("Merci de choisir un numéro valide (de 1 à %d) : ", *handSize);
         scanf_s("%d", &choice);
     }
     
@@ -37,7 +37,7 @@ void playCard(deck hand, int* handSize, monster monster){
         {
             startHand = hand->next;
         }
-        else if (choice==sizeHand)
+        else if (choice==(*handSize))
         {
             prevHand->next = NULL;
         }
@@ -82,8 +82,8 @@ void drawCard(deck draw, deck hand, deck discardPile){
     {
         // shuffling the discard pile
         cards *discardTab = returnDeckTab(discardPile);
-        discardTab = shuffle(drawTab);
-        discardPile = returnDeck(drawTab);
+        discardTab = shuffle(discardTab);
+        discardPile = returnDeck(discardTab);
 
         while (discardPile != NULL)
         {
@@ -182,6 +182,8 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
         hand = hand->next;
     }
 
+    int monsterHPBefore = monster->hp;
+
     hand = startHand;
     int handSize = 5;
 
@@ -191,10 +193,37 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
     scanf_s("%d", &choice);
     while (choice != 2)
     {
-        playCard(hand, &handSize, monster);
+        playCard(hand, &handSize, monster, discardPile, abysses);
         printf("1. Jouer une carte\n");
         printf("2. Fin du tour\n");
         scanf_s("%d", &choice);
+    }
+
+    // if the monster has dodge, it takes less damage
+    if (monster->hp < monsterHPBefore)
+    {
+        if (monster->dodge > 0)
+        {
+            int diffHP = monsterHPBefore-monster->hp;
+            if (diffHP < monster->dodge)
+            {
+                monster->hp += diffHP;
+                monster->dodge -= diffHP;
+            }
+            else
+            {
+                monster->hp += monster->dodge;
+                monster->dodge = 0;
+            }
+        }
+    }
+
+    monster->dodge = 0;
+
+    // if the monster has no more hp, the fight is finished
+    if (monster->hp == 0)
+    {
+        return;
     }
 
     int playerHPBefore = currentPlayerHP;
@@ -206,35 +235,35 @@ void turn(int turn, monster monster, deck draw, deck discardPile, deck abysses){
             break;
 
         case 1:
-            blouniAbilities(randomValue)
+            blouniAbilities(randomValue);
             break;
 
         case 2:
-            kelikoAbilities(randomValue)
+            kelikoAbilities(randomValue);
             break;
 
         case 3:
-            jawurm2Abilities(randomValue)
+            jawurm2Abilities(randomValue);
             break;
 
         case 4:
-            redoniAbilities(randomValue)
+            redoniAbilities(randomValue);
             break;
 
         case 5:
-            mangoustineAbilities(randomValue)
+            mangoustineAbilities(randomValue);
             break;
 
         case 6:
-            eldanAbilities(randomValue)
+            eldanAbilities(randomValue);
             break;
 
         case 7:
-            pyroxAbilities(randomValue)
+            pyroxAbilities(randomValue);
             break;
 
         case 8:
-            keeperOfTheFeatherAbilities(randomValue)
+            keeperOfTheFeatherAbilities(randomValue);
             break;
         
         default:
@@ -335,49 +364,50 @@ void fight(deck currentDeck, monster monster){
         for (int i = 0; i < 2; i++)
         {
             int randomValue = rand() % 12;
+            cards card;
 
             switch (randomValue)
             {
             case 0:
-                cards card = createStrike();
+                card = createStrike();
                 break;
             case 1:
-                cards card = createEsquive();
+                card = createEsquive();
                 break;
             case 2:
-                cards card = createDoubleStrike();
+                card = createDoubleStrike();
                 break;
             case 3:
-                cards card = createBouleDeFeu();
+                card = createBouleDeFeu();
                 break;
             case 4:
-                cards card = createCoupAffaiblissant();
+                card = createCoupAffaiblissant();
                 break;
             case 5:
-                cards card = createAcceleration();
+                card = createAcceleration();
                 break;
             case 6:
-                cards card = createSurmenage();
+                card = createSurmenage();
                 break;
             case 7:
-                cards card = createPostureDefensive();
+                card = createPostureDefensive();
                 break;
             case 8:
-                cards card = createConcentration();
+                card = createConcentration();
                 break;
             case 9:
-                cards card = createIncendie();
+                card = createIncendie();
                 break;
             case 10:
-                cards card = createPulveriser();
+                card = createPulveriser();
                 break;
             case 11:
-                cards card = createSpectreComplet();
+                card = createSpectreComplet();
                 break;
             
             default:
                 // easter egg
-                cards card = createMartinsFury();
+                card = createMartinsFury();
                 break;
             }
 
