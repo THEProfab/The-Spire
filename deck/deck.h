@@ -32,6 +32,8 @@ deck startingDeck();
 
 deck strikeIntoEsquive(deck decks,bool choice);
 
+deck onEventDeleteCard(deck decks);
+
 cards createStrike();
 
 cards createEsquive();
